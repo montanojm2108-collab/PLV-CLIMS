@@ -1,0 +1,50 @@
+:host { display:flex; flex-direction:column; min-height:0; }
+.ticket-detail-content { --background:#f5f5f7; }
+.ticket-detail-wrap { display:flex; justify-content:center; align-items:flex-start; min-height:100%; padding:28px 20px; }
+.ticket-dialog { width:100%; max-width:612px; background:#fff; border-radius:14px; box-shadow:0 4px 24px #20142012; overflow:hidden; }
+.dialog-header { display:flex; align-items:center; gap:22px; padding:26px 28px 19px; border-bottom:1px solid #c7c7c7; }
+.dialog-header h1 { margin:0; font-size:23px; font-weight:500; }
+.detail-status { display:inline-flex; align-items:center; gap:5px; border:1px solid #ff5555; border-radius:20px; background:#fff2f2; color:#f00000; padding:5px 20px; font-size:10px; text-transform:uppercase; white-space:nowrap; }
+.detail-status::before { content:''; width:4px; height:4px; border-radius:50%; background:currentColor; }
+.detail-status.resolved { color:#0aa627; border-color:#31be48; background:#efffef; }
+.detail-status.in-progress { color:#d58200; border-color:#ffb247; background:#fff7e9; }
+.icon-close { margin-left:auto; border:0; background:none; color:#999; cursor:pointer; padding:4px; font-size:22px; line-height:1; }
+.dialog-body { padding:36px 26px 34px; }
+.ticket-facts { display:grid; grid-template-columns:1fr 1fr; gap:18px 34px; margin:0 3px 26px; }
+.ticket-facts .full { grid-column:1/-1; }
+.ticket-facts dt,.dialog-body h2 { margin:0 0 8px; font-size:13px; font-weight:400; color:#777; }
+.ticket-facts dd { margin:0; color:#141414; font-size:14px; line-height:1.5; overflow-wrap:anywhere; }
+.description-section,.photo-section { margin:0 3px 24px; }
+.description-section p { margin:0; color:#333; font-size:13px; line-height:1.8; white-space:pre-wrap; overflow-wrap:anywhere; }
+.attachment { display:flex; align-items:center; gap:16px; padding:0; border:0; background:none; text-align:left; color:inherit; cursor:pointer; font:inherit; }
+.attachment img { width:138px; height:93px; border-radius:12px; object-fit:cover; background:#f2f3f5; }
+.attachment strong { display:block; font-size:14px; font-weight:400; }
+.attachment small { display:block; margin-top:8px; font-size:12px; color:#2012b4; }
+.no-photo { color:#999; font-size:12px; margin:0; }
+.photo-section { margin-bottom:30px; }
+.dialog-body .section-strip { border-radius:7px; color:#2012b4; background:#f5f2fc; font-size:10px; padding:7px 17px; text-transform:uppercase; margin:0 0 15px; }
+.observation-form { display:flex; gap:8px; }
+.observation-input { display:flex; align-items:center; gap:8px; flex:1; min-width:0; border:1px solid #aaa; border-radius:6px; padding:0 14px; }
+.observation-input span { color:#888; font-size:18px; }
+.observation-input input { border:0; outline:0; min-width:0; width:100%; font:inherit; font-size:11px; padding:9px 0; color:inherit; background:none; }
+.observation-input:focus-within { outline:2px solid #2012b4; outline-offset:2px; }
+.observation-form .btn { min-height:33px; font-size:11px; min-width:156px; padding:8px 15px; }
+.close-button { width:100%; margin-top:17px; min-height:38px; font-size:13px; }
+.activity-history { margin-top:17px; color:#777; font-size:11px; }
+.activity-history summary { cursor:pointer; width:fit-content; }
+.activity-history>div { padding:12px 3px; border-bottom:1px solid #eee; }
+.activity-history p { margin:0 0 5px; color:#333; white-space:pre-wrap; overflow-wrap:anywhere; }
+.activity-history small { font-size:10px; }
+.admin-section { margin-bottom:24px; }
+.admin-section .field-label { font-size:11px; }
+.admin-save { margin-top:12px; font-size:11px; }
+.photo-viewer { --background:#141414; }
+.photo-viewer img { display:block; width:100%; height:100%; object-fit:contain; }
+.missing-ticket { padding:28px; }
+button:focus-visible,summary:focus-visible { outline:2px solid #2012b4; outline-offset:3px; }
+@media(max-width:550px) { .ticket-detail-wrap { padding:12px 10px; } .dialog-header { padding:23px 18px 18px; gap:12px; } .dialog-header h1 { font-size:21px; } .detail-status { padding-inline:12px; font-size:9px; } .dialog-body { padding:28px 18px; } .ticket-facts { gap:18px 20px; } .observation-form { flex-direction:column; gap:12px; } .observation-input { min-height:42px; } .observation-form .btn { min-height:42px; } .attachment img { width:110px; } }
+
+:host.embedded-ticket { height:100%; }
+:host.embedded-ticket .ticket-detail-content { --background:#fff; }
+:host.embedded-ticket .ticket-detail-wrap { padding:0; display:block; }
+:host.embedded-ticket .ticket-dialog { max-width:none; border-radius:0; box-shadow:none; }

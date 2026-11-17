@@ -1,0 +1,33 @@
+<ion-app [class.student-portal]="auth.role() === 'student' || auth.role() === 'technical'">
+ <ion-split-pane contentId="main-content" when="lg" [disabled]="!auth.currentUser()" (ionSplitPaneVisible)="desktopMenuVisible = $event.detail.visible">
+  <ion-menu contentId="main-content" menuId="main-menu" type="overlay" [swipeGesture]="auth.role()==='admin'" [disabled]="!auth.currentUser()">
+   <ion-content class="menu-content">
+    <div class="brand">
+<img src="assets/clims-portal-logo.png" class="portal-logo" alt="CLIMS logo">
+<div>
+<strong>PLV-CLIMS</strong>
+<small>{{portal}}</small>
+</div>
+</div>
+    <nav aria-label="Main navigation">
+<ion-menu-toggle [autoHide]="!desktopMenuVisible" *ngFor="let link of links">
+<a class="nav-link" [routerLink]="link.path" routerLinkActive="selected" [class.selected]="(link.path === '/student/laboratories' && router.url.startsWith('/student/computers/')) || (link.path === '/technical/tickets' && (router.url.startsWith('/tickets/') || router.url.startsWith('/technical/tickets/')))" [routerLinkActiveOptions]="{exact:link.path !== '/student/laboratories'}">
+<ion-icon class="nav-icon" [name]="link.icon">
+</ion-icon>{{link.title}}</a>
+</ion-menu-toggle>
+</nav>
+   </ion-content>
+   <ion-footer class="menu-footer"><span *ngIf="!auth.currentUser()?.avatar && auth.role()!=='admin'" class="menu-avatar menu-initial" aria-label="Profile initials">{{auth.currentUser()?.name?.charAt(0)}}</span><img *ngIf="auth.currentUser()?.avatar" class="menu-avatar" [src]="auth.currentUser()?.avatar" alt="">
+<div>
+<small>{{auth.role() === 'student' ? 'Student' : auth.role() === 'technical' ? 'Tech Representative' : 'Signed in as'}}</small>
+<strong>{{auth.currentUser()?.name}}</strong>
+</div>
+<button class="logout" (click)="auth.confirmLogout()" aria-label="Log out"><ion-icon name="log-out-outline"></ion-icon></button>
+</ion-footer>
+  </ion-menu>
+  <ion-router-outlet id="main-content">
+</ion-router-outlet>
+ </ion-split-pane>
+ <nav class="mobile-bottom-nav" *ngIf="auth.currentUser() && auth.role()!=='admin'" aria-label="Mobile navigation"><a *ngFor="let link of mobileLinks" [routerLink]="link.path" [class.active]="mobileSelected(link)" [attr.aria-current]="mobileSelected(link)?'page':null"><ion-icon [name]="link.icon" aria-hidden="true"></ion-icon><span>{{link.title}}</span></a></nav>
+</ion-app>
+

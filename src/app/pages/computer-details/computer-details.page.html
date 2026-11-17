@@ -1,0 +1,32 @@
+<app-page-header title="Computer Details" [compact]="true"></app-page-header>
+<ion-content><main class="page-wrap equipment-page">
+  <nav class="back-bar"><button (click)="router.navigateByUrl(computer ? '/student/laboratories/'+computer.labId : '/student/laboratories')"><span aria-hidden="true">&lsaquo;</span> {{computer?'Back to Laboratory':'Back to Laboratories'}}</button></nav>
+  <ng-container *ngIf="computer as c; else notFound">
+    <header class="equipment-heading">
+      <div><div class="computer-title"><h1>{{c.name}}</h1><span class="equipment-badge" [class.working]="c.status==='Working'" [class.repair]="c.status==='Repair'" [class.unavailable]="c.status==='Unavailable'">{{c.status==='Repair'?'Under Maintenance':c.status}}</span></div><p>{{lab?.name}} &middot; {{lab?.building}} &middot; {{lab?.room}}</p></div>
+      <button class="btn report-button" *ngIf="auth.role()==='technical'" (click)="report()"><span aria-hidden="true">+</span> REPORT AN ISSUE</button>
+    </header>
+    <div class="details-grid" [class.without-reports]="auth.role()!=='technical'">
+      <section class="details-panel specifications">
+        <h2>Computer Details</h2>
+        <div class="spec-columns">
+          <dl><div><dt>Status</dt><dd [class.status-working]="c.status==='Working'" [class.status-repair]="c.status==='Repair'" [class.status-unavailable]="c.status==='Unavailable'">{{c.status==='Repair'?'Under Maintenance':c.status}}</dd></div><div><dt>Peripherals</dt><dd>{{c.peripherals || 'Not recorded'}}</dd></div><div><dt>Memory</dt><dd>{{c.memory || 'Not recorded'}}</dd></div><div><dt>Processor</dt><dd>{{c.processor || 'Not recorded'}}</dd></div><div><dt>Storage</dt><dd>{{c.storage || 'Not recorded'}}</dd></div></dl>
+          <dl><div><dt>Operating System</dt><dd>{{c.operatingSystem || 'Not recorded'}}</dd></div><div><dt>Last Checked</dt><dd>{{lastChecked ? (lastChecked | date:'MMM d, y') : 'Not recorded'}}</dd></div><div *ngIf="c.notes"><dt>Notes</dt><dd>{{c.notes}}</dd></div></dl>
+        </div>
+      </section>
+      <section class="details-panel reports" *ngIf="auth.role()==='technical'">
+        <h2>Your Reports</h2>
+        <div class="table-scroll"><table><thead><tr><th>Ticket</th><th>Reported</th><th>Status</th></tr></thead><tbody><tr *ngFor="let t of myReports"><td><button *ngIf="auth.role()!=='student'; else reportId" class="ticket-link" (click)="router.navigateByUrl('/tickets/'+t.id)">{{t.id}}</button><ng-template #reportId>{{t.id}}</ng-template></td><td>{{t.createdAt | date:'MMM d, y'}}</td><td><span class="equipment-badge" [class.working]="resolved(t)" [class.unavailable]="!resolved(t)">{{resolved(t)?'Resolved':'Unresolved'}}</span></td></tr></tbody></table></div>
+        <p class="empty" *ngIf="!myReports.length">You have no reports for this computer.</p>
+      </section>
+      <section class="details-panel history">
+        <h2>Maintenance History</h2>
+        <div class="table-scroll"><table><thead><tr><th>Ticket</th><th>Issue</th><th>Reported</th><th>Resolved</th><th>Status</th></tr></thead><tbody><tr *ngFor="let t of tickets"><td><button *ngIf="auth.role()!=='student'; else historyId" class="ticket-link" (click)="router.navigateByUrl('/tickets/'+t.id)">{{t.id}}</button><ng-template #historyId>{{t.id}}</ng-template></td><td>{{t.category}}</td><td>{{t.createdAt | date:'MMM d, y'}}</td><td>{{resolvedDate(t) ? (resolvedDate(t) | date:'MMM d, y') : (resolved(t)?'Not recorded':'&mdash;')}}</td><td><span class="equipment-badge" [class.working]="resolved(t)" [class.unavailable]="!resolved(t)">{{resolved(t)?'Resolved':'Unresolved'}}</span></td></tr></tbody></table></div>
+        <p class="empty" *ngIf="!tickets.length">No recorded issue tickets for this computer.</p>
+        <div class="service-records" *ngIf="maintenance.length"><h3>Service Records</h3><div *ngFor="let record of maintenance"><strong>{{record.detail}}</strong><span>{{record.date | date:'MMM d, y'}} &middot; {{record.status}}</span></div></div>
+      </section>
+      <section class="details-panel admin-controls" *ngIf="auth.role()==='admin'"><h2>Manage Computer</h2><div class="form-grid"><div class="form-col"><label class="field-label" for="computer-status">Status</label><select id="computer-status" class="field" [(ngModel)]="status"><option value="Working">Working</option><option value="Repair">Under Maintenance</option><option value="Unavailable">Unavailable</option></select></div><div class="form-col full"><label class="field-label" for="computer-notes">Maintenance notes</label><textarea id="computer-notes" class="field" [(ngModel)]="notes"></textarea></div></div><button class="btn" (click)="save()">Save changes</button></section>
+    </div>
+  </ng-container>
+  <ng-template #notFound><p class="empty">Computer not found.</p></ng-template>
+</main></ion-content>

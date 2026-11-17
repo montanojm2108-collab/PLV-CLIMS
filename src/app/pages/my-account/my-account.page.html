@@ -1,0 +1,42 @@
+<app-page-header [title]="auth.role()!=='admin'?'Account Settings':'My Account'"></app-page-header>
+<ion-content><main class="page-wrap student-page account-page">
+  <h1 class="page-title">{{auth.role()!=='admin'?'Account Settings':'My Account'}}</h1>
+  <p class="page-subtitle">Manage your {{auth.role()==='student'?'student ':''}}profile and account preferences.</p>
+  <div class="account-grid">
+    <section class="panel profile-panel">
+      <h2>Profile Information</h2>
+      <div class="photo-row">
+        <img *ngIf="auth.currentUser()?.avatar; else initials" class="profile-avatar" [src]="auth.currentUser()?.avatar" alt="Your profile photo">
+        <ng-template #initials><span class="profile-avatar avatar-initial" aria-label="Profile initials">{{auth.currentUser()?.name?.charAt(0)}}</span></ng-template>
+        <div class="mobile-profile-name"><strong>{{auth.currentUser()?.name}}</strong><small>{{auth.role()==='student'?'Student':auth.role()==='technical'?'Tech Representative':'Administrator'}}</small></div>
+        <input #photoInput class="visually-hidden" type="file" accept="image/*" (change)="photo($event)" aria-label="Upload profile photo" tabindex="-1">
+        <button class="btn photo-button" type="button" (click)="photoInput.click()">&uarr; CHANGE PHOTO</button>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <div class="form-grid">
+          <div class="form-col"><label class="field-label" for="profile-name">Full Name</label><input id="profile-name" class="field" formControlName="name" autocomplete="name"><span class="error-text" *ngIf="form.controls.name.touched && form.controls.name.invalid">Full name is required.</span></div>
+          <div class="form-col role-field"><label class="field-label" for="profile-role">Role (unchangeable)</label><input id="profile-role" class="field" [value]="auth.role()==='student'?'Student':auth.role()==='technical'?'Technical Representative':'Administrator'" disabled></div>
+          <div class="form-col"><label class="field-label" for="profile-email">Email Address</label><input id="profile-email" class="field" type="email" formControlName="email" autocomplete="email"><span class="error-text" *ngIf="form.controls.email.touched && form.controls.email.invalid">Enter a valid email address.</span></div>
+          <div class="form-col"><label class="field-label" for="profile-id">Student ID (unchangeable)</label><input id="profile-id" class="field" [value]="auth.currentUser()?.studentId || 'Not assigned'" disabled></div>
+        </div>
+        <button class="btn save-button" type="submit">SAVE CHANGES</button>
+      </form>
+    </section>
+    <section class="panel sessions-panel">
+      <h2>Sessions</h2>
+      <div class="session-row"><span class="session-dot"></span><span>This browser / device</span><small>Current</small></div>
+      <p class="session-note">This demo stores your session on this device. Other devices are not tracked.</p>
+      <button class="btn danger" type="button" (click)="auth.confirmLogout()">LOG OUT OF THIS DEVICE</button>
+    </section>
+    <section class="panel security-panel">
+      <h2>Security &amp; Preferences</h2>
+      <div class="form-col"><label class="field-label" for="change-password">Password</label><button class="password-control" id="change-password" type="button" (click)="password()"><span aria-hidden="true">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span><span>Change password &rsaquo;</span></button></div>
+      <form [formGroup]="form" (ngSubmit)="savePreferences()">
+        <label class="field-label" for="notifications">Notifications</label>
+        <div class="notification-preference"><label for="notifications">Receive laboratory updates and reminders</label><input id="notifications" type="checkbox" role="switch" formControlName="notifications"></div>
+        <button class="btn save-button" type="submit">SAVE CHANGES</button>
+      </form>
+    </section>
+  </div>
+  <p class="data-note">Demo profile and preferences are saved only on this device.</p>
+</main></ion-content>

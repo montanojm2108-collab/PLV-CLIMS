@@ -1,0 +1,46 @@
+:host{display:flex;flex-direction:column;min-height:0}
+ion-content { --background: #fff; }
+.dashboard-page { padding-top: 36px; }
+.student-page.dashboard-page .dashboard-search { max-width: 632px; min-height: 56px; margin-bottom: 26px; border: 0; box-shadow: 0 4px 12px #0003; border-radius: 11px; }
+.section-heading { padding: 4px 10px 12px; }
+.availability-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 13px; }
+.availability-table th { background: #eae0f3; color: #6500b8; padding: 12px; font-size: 15px; font-weight: 600; }
+.availability-table th:first-child { text-align:left; padding-left:44px; border-radius:12px 0 0 0; }
+.availability-table th:last-child { border-radius:0 12px 0 0; }
+.availability-table td { padding: 13px 12px; border-bottom: 1px solid #e8e8e8; }
+.lab-name-link { display:flex; gap:14px; align-items:center; border:0; background:none; color:inherit; font:inherit; font-size:15px; font-weight:600; text-align:left; cursor:pointer; }
+.notification-panel { margin-top:12px; }
+.all-notifications { margin:12px 10px 0; }
+@media(max-width:700px) {
+ .dashboard-page { padding-top:20px; }
+ .availability-table { min-width:660px; }
+ .section-heading { align-items:flex-start; }
+}
+
+.mobile-view-label,.mobile-lab-location { display:none; }
+@media(max-width:700px) {
+ .student-page.dashboard-page { padding:8px 10px 24px; }
+ .student-page.dashboard-page .dashboard-search { margin:0 5px 30px; min-height:38px; padding:0 11px; border-radius:8px; }
+ .dashboard-search input { font-size:12px; padding:10px 0; }
+ .dashboard-search ion-icon { font-size:15px; }
+ .student-page .availability-panel { padding:0; border:0; }
+ .section-heading { position:relative; display:block; padding:0 0 8px; }
+ .student-page .section-heading h1,.student-page .section-heading h2 { font-size:18px; letter-spacing:-.4px; }
+ .student-page .section-heading p { font-size:12px; margin-top:10px; line-height:1.5; }
+ .section-heading .text-action { position:absolute; top:6px; right:8px; font-size:12px; }
+ .desktop-view-label { display:none; }
+ .mobile-view-label { display:inline; }
+ .availability-table { min-width:0; width:100%; font-size:11px; table-layout:fixed; }
+ .availability-table th:nth-child(2),.availability-table th:nth-child(3),.availability-table td:nth-child(2),.availability-table td:nth-child(3) { display:none; }
+ .availability-table th:first-child { width:68%; padding:10px 22px; font-size:13px; border-radius:14px 0 0 0; }
+ .availability-table th:last-child { padding:10px 6px; font-size:13px; border-radius:0 14px 0 0; }
+ .availability-table td { padding:16px 6px; height:68px; border:1px solid #f0f0f0; }
+ .lab-name-link { gap:10px; font-size:11px; width:100%; padding:0 10px; }
+ .student-page .computer-icon { flex-basis:32px; width:32px; height:32px; font-size:21px; }
+ .mobile-lab-location { display:block; font-size:9px; font-weight:400; margin-top:6px; line-height:1.4; }
+ .student-page .availability-badge { font-size:9px; min-width:80px; padding:5px 8px; }
+ .student-page .notification-panel { margin-top:30px; border:0; padding:0; }
+ .notification-panel .section-heading { text-align:center; }
+ .notification-panel .section-heading p { margin-top:4px; }
+ .student-page .notification-row { padding-inline:14px; }
+}

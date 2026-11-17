@@ -1,0 +1,50 @@
+<ion-content class="login-content">
+  <div class="login-wrap">
+    <section class="login-brand" aria-label="PLV-CLIMS">
+      <div class="brand-lockup">
+        <img src="assets/clims-login-logo.png" alt="" width="42" height="42">
+        <span>PLV-CLIMS</span>
+      </div>
+      <div class="brand-message">
+        <span class="brand-eyebrow">Computer Lab Monitoring System</span>
+        <h1>Check Status. Report Issues.<br>Smarter Lab Monitoring.</h1>
+        <p>View computer laboratory PCs status and report<br class="desktop-break"> technical issues in one place.</p>
+      </div>
+    </section>
+    <section class="login-form" aria-labelledby="login-title">
+      <div class="form-inner">
+        <h2 id="login-title">Sign in to PLV-CLIMS</h2>
+        <p class="form-intro">Access your computer laboratory monitoring account.</p>
+        <form [formGroup]="form" (ngSubmit)="login()">
+          <div class="form-col">
+            <label class="field-label" for="handle">Student ID or Email</label>
+            <input class="field" id="handle" formControlName="handle" placeholder="Enter student ID or email" autocomplete="username" autocapitalize="none" spellcheck="false">
+            <span *ngIf="form.controls.handle.touched && form.controls.handle.invalid" class="error-text">Account ID is required.</span>
+          </div>
+          <div class="form-col">
+            <label class="field-label" for="password">Password</label>
+            <input class="field" id="password" type="password" formControlName="password" placeholder="Enter your password" autocomplete="current-password">
+            <span *ngIf="form.controls.password.touched && form.controls.password.invalid" class="error-text">Password is required.</span>
+          </div>
+          <div class="login-options">
+            <label><input type="checkbox" formControlName="remember"> Remember Me</label>
+            <button class="text-link" type="button" (click)="forgot()">Forgot Password?</button>
+          </div>
+          <div *ngIf="error" class="error-text" role="alert">{{error}}</div>
+          <button class="btn login-btn" type="submit">Sign In</button>
+        </form>
+        <details class="demo-access">
+          <summary>Demo access &amp; account creation</summary>
+          <div class="demo-credentials">
+            <small>Student: student&#64;plv.edu.ph / Student123!</small>
+            <small>Technical: tech&#64;plv.edu.ph / Tech123!</small>
+            <small>Admin: admin&#64;plv.edu.ph / Admin123!</small>
+            <small>Local demo accounts only &mdash; not production authentication.</small>
+            <button class="text-link" type="button" (click)="create()">Create an account</button>
+          </div>
+        </details>
+      </div>
+      <footer>Pamantasan ng Lungsod ng Valenzuela</footer>
+    </section>
+  </div>
+</ion-content>

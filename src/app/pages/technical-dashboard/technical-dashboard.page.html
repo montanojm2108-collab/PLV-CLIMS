@@ -1,0 +1,16 @@
+<app-page-header title="Dashboard"></app-page-header>
+<ion-content><main class="page-wrap student-page technical-dashboard">
+  <div class="search-field dashboard-search"><ion-icon name="search-outline" aria-hidden="true"></ion-icon><input [(ngModel)]="query" placeholder="Search room, functionality" aria-label="Search laboratories"></div>
+  <div class="ticket-stats">
+    <button class="ticket-stat active-stat" (click)="go('/technical/tickets')"><span class="stat-icon"><ion-icon name="time-outline"></ion-icon></span><span><strong>{{active}}</strong><small>Active Tickets</small></span></button>
+    <button class="ticket-stat mine-stat" (click)="go('/technical/tickets?scope=mine')"><span class="stat-icon"><ion-icon name="time-outline"></ion-icon></span><span><strong>{{mine}}</strong><small>Reported by me</small></span></button>
+    <button class="ticket-stat resolved-stat" (click)="go('/technical/tickets?status=Resolved')"><span class="stat-icon"><ion-icon name="time-outline"></ion-icon></span><span><strong>{{resolved}}</strong><small>Resolved Tickets</small></span></button>
+  </div>
+  <div class="dashboard-columns">
+    <section class="dashboard-panel"><div class="panel-heading"><h2>Laboratory Overview</h2><button class="text-action" (click)="go('/student/laboratories')">View all &rsaquo;</button></div>
+      <button class="overview-lab" *ngFor="let lab of labs" (click)="go('/student/laboratories/'+lab.id)"><span class="computer-icon"><ion-icon name="desktop-outline"></ion-icon></span><span><strong>{{lab.name}}</strong><small>{{lab.building}} &middot; {{lab.room}}</small></span><span class="working-pcs">{{count(lab.id)}} working PCs <span aria-hidden="true">&rsaquo;</span></span></button>
+      <p class="empty" *ngIf="!labs.length">No laboratories match your search.</p>
+    </section>
+    <section class="dashboard-panel"><h2>Notification</h2><button class="dashboard-notice" *ngFor="let a of notices" (click)="go('/announcements')"><span class="notice-date">{{a.date | date:'MMM d'}}</span><strong>{{a.title}}</strong><span>{{a.body}}</span></button><p class="empty" *ngIf="!notices.length">No notifications yet.</p><button class="text-action" (click)="go('/announcements')">View all &rsaquo;</button></section>
+  </div>
+</main></ion-content>

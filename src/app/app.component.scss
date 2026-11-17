@@ -1,0 +1,38 @@
+ion-menu{--width:238px;--background:#2012B4;--ion-background-color:#2012B4;--ion-text-color:#fff}ion-split-pane{--side-width:238px;--side-min-width:238px;--side-max-width:238px;--border:0}ion-menu::part(container){background:#2012B4}.menu-content{--background:#2012B4;--color:#fff}.brand{display:flex;align-items:center;gap:10px;padding:28px 17px 20px;color:#fff}.brand strong{font-size:18px;display:block}.brand small{display:block;font-size:10px;margin-top:4px;color:#dedafc}.nav-link{display:flex;align-items:center;gap:13px;color:#eae7ff;text-decoration:none;font-size:13px;margin:4px 12px;padding:12px 10px;border-radius:5px;transition:background .18s,color .18s}.nav-link:hover{background:#4033c5}.nav-link.selected{background:#fff;color:#2012B4;font-weight:700}.nav-icon{font-size:17px;display:inline-block;width:21px;text-align:center}.menu-footer{padding:12px 18px 18px;background:#2012B4;color:white;display:flex;align-items:center;justify-content:space-between;gap:10px}.menu-footer small{display:block;font-size:10px}.menu-footer strong{display:block;font-size:12px}.logout{border:1px solid white;background:none;color:white;border-radius:5px;font-size:11px;padding:7px;cursor:pointer}.logout:hover{background:#4033c5}
+ion-menu,ion-menu::part(container),.menu-content { --background: white; --ion-background-color: white; --ion-text-color: #201420; background: white; }
+.brand,.brand small,.menu-footer { color: #201420; }
+.nav-link,.logout { color: #2012b4; }
+.nav-link:hover,.logout:hover { background:#f2f0ff; }
+.nav-link.selected { background:#2012b4; color:white; }
+.menu-footer { background:white; border-top:1px solid #ddd; }
+.logout { border-color:#2012b4; }
+
+.student-portal {
+  ion-split-pane { --side-width: 215px; --side-min-width: 215px; --side-max-width: 215px; }
+  ion-menu, ion-menu::part(container), .menu-content { --background: #f6f6f6; --ion-background-color: #f6f6f6; background: #f6f6f6; }
+  .brand { padding: 32px 18px 24px; gap: 8px; color: #2012b4; }
+  .brand strong { font-weight: 500; font-size: 19px; }
+  .brand small { margin-top: 1px; color: #2012b4; font-size: 9px; }
+  .nav-link { margin: 0 17px 2px; padding: 12px 13px; gap: 8px; color: #777; font-size: 13px; border-radius: 6px; }
+  .nav-link.selected { color: #fff; }
+  .nav-icon { font-size: 20px; }
+  .menu-footer { background: #f6f6f6; padding: 18px 16px; border-top-color: #eee; }
+  .menu-footer > div { display: flex; flex: 1; flex-direction: column-reverse; gap: 3px; }
+  .menu-footer strong { font-size: 11px; font-weight: 400; }
+  .menu-footer small { font-size: 9px; font-style: italic; }
+  .logout { border: 0; color: #444; font-size: 23px; padding: 0; }
+}
+.menu-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; }
+
+.menu-initial { display:flex; align-items:center; justify-content:center; background:#eae0f6; color:#2012b4; font-size:17px; }
+
+.mobile-bottom-nav { display:none; }
+@media(max-width:991px) {
+ .student-portal ion-menu { display:none; }
+ .student-portal ion-split-pane { height:calc(100% - 64px - env(safe-area-inset-bottom, 0px)); bottom:calc(64px + env(safe-area-inset-bottom, 0px)); }
+ .mobile-bottom-nav { position:absolute; bottom:0; left:0; right:0; z-index:20; display:flex; justify-content:space-around; align-items:stretch; min-height:64px; padding:4px 8px calc(4px + env(safe-area-inset-bottom, 0px)); background:#fff; border-top:1px solid #ececf0; box-shadow:0 -2px 12px #20142008; }
+ .mobile-bottom-nav a { flex:1; min-width:0; min-height:56px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:5px; padding:6px 2px; text-decoration:none; color:#888; font-size:9px; text-align:center; }
+ .mobile-bottom-nav ion-icon { font-size:23px; }
+ .mobile-bottom-nav a.active { color:#2012b4; }
+ .mobile-bottom-nav a:focus-visible { outline:2px solid #2012b4; outline-offset:-3px; border-radius:6px; }
+}

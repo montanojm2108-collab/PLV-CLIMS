@@ -1,0 +1,27 @@
+<app-page-header title="Laboratory Layout" [compact]="true"></app-page-header>
+<ion-content>
+  <main class="page-wrap equipment-page">
+    <nav class="back-bar"><button (click)="router.navigateByUrl('/student/laboratories')"><span aria-hidden="true">&lsaquo;</span> Back to Laboratories</button></nav>
+    <ng-container *ngIf="lab as l; else missing">
+      <header class="equipment-heading">
+        <div><h1>{{l.name}}</h1><p>{{l.building}} &middot; {{l.room}}</p></div>
+        <dl class="lab-summary"><div><dt>Unresolved tickets</dt><dd>{{unresolvedTickets}}</dd></div><div><dt>Last inspected</dt><dd>{{lastInspected ? (lastInspected | date:'MMM d, y') : 'Not recorded'}}</dd></div></dl>
+      </header>
+      <div class="map-toolbar">
+        <div class="status-summary"><span class="total-pcs">{{all.length}} Total PCs</span><span class="equipment-badge working">Working {{count('Working')}}</span><span class="equipment-badge repair">Under Maintenance {{count('Repair')}}</span><span class="equipment-badge unavailable">Unavailable {{count('Unavailable')}}</span></div>
+        <button *ngIf="auth.role()==='admin'" class="btn secondary btn-sm" (click)="editing=!editing;firstSelected=''">{{editing?'Finish editing':'Edit layout'}}</button>
+      </div>
+      <details class="map-filters"><summary>Search &amp; filter computers</summary><div class="filter-fields"><input class="field" [(ngModel)]="query" placeholder="Search PC..." aria-label="Search computers"><select class="field" [(ngModel)]="filter" aria-label="Filter computer status"><option value="All">All statuses</option><option value="Working">Working</option><option value="Repair">Under Maintenance</option><option value="Unavailable">Unavailable</option></select></div></details>
+      <div class="notice" *ngIf="editing">Select two computer tiles to swap their positions. {{firstSelected?'First tile selected. Choose a second tile.':''}}</div>
+      <div class="room-marker">Front / Instructor Desk</div>
+      <div class="room-grid" aria-label="Laboratory computers">
+        <button *ngFor="let c of computers" class="computer-tile" [class.repair]="c.status==='Repair'" [class.unavailable]="c.status==='Unavailable'" [class.selected]="firstSelected===c.id" [attr.aria-label]="c.name + ', ' + (c.status==='Repair'?'Under maintenance':c.status)" (click)="go(c.id)">
+          <ion-icon name="desktop-outline" aria-hidden="true"></ion-icon><strong>{{c.name}}</strong><span>{{c.status==='Repair'?'Under Maintenance':c.status}}</span>
+        </button>
+      </div>
+      <p *ngIf="!computers.length" class="empty">No matching computers.</p>
+      <div class="room-marker">Back</div>
+    </ng-container>
+    <ng-template #missing><p class="empty">Laboratory not found.</p></ng-template>
+  </main>
+</ion-content>

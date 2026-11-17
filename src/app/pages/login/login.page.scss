@@ -1,0 +1,85 @@
+:host { display: flex; flex-direction: column; height: 100%; }
+.login-content { --background: #171830; }
+.login-wrap {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 47.7%);
+  padding: max(20px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(35px, env(safe-area-inset-left));
+  background: linear-gradient(180deg, rgba(18, 19, 61, .73), rgba(12, 12, 25, .8)), url('/assets/campus.jpg') center / cover;
+}
+.login-brand { display: flex; flex-direction: column; min-width: 0; padding: 27px 28px 24px 0; color: #fff; }
+.brand-lockup { display: flex; align-items: center; gap: 10px; font-size: 18px; }
+.brand-lockup img { display: block; width: 42px; height: 42px; object-fit: contain; background: #fff; border-radius: 12px; }
+.brand-message { margin-top: auto; padding-top: 120px; }
+.brand-eyebrow { display: inline-block; padding: 6px 20px; border: 1px solid rgba(255, 255, 255, .8); border-radius: 24px; font-size: 11px; letter-spacing: .8px; text-transform: uppercase; }
+h1 { margin: 23px 0 16px; font-size: clamp(28px, 3.2vw, 46px); font-weight: 400; line-height: 1.26; letter-spacing: -1.2px; }
+.brand-message p { margin: 0; color: #d0ced2; font-size: 14px; line-height: 1.9; }
+.login-form { display: flex; flex-direction: column; min-width: 0; padding: clamp(70px, 16vh, 130px) clamp(28px, 4vw, 64px) 34px; border-radius: 0 84px 0 84px; background: #fff; }
+.form-inner { width: 100%; max-width: 520px; margin: 0 auto; }
+h2 { margin: 0 0 6px; color: #201420; font-size: clamp(28px, 3.5vw, 46px); font-weight: 500; line-height: 1.15; letter-spacing: -1.4px; }
+.form-intro { margin: 0 0 46px; color: #6b6b6b; font-size: 16px; line-height: 1.5; }
+.form-col { gap: 9px; margin-bottom: 20px; }
+.field-label { font-size: 13px; font-weight: 400; color: #333; }
+.field { min-height: 55px; border-color: #c9c9c9; border-radius: 6px; padding: 14px 13px; font-size: 16px; }
+.field::placeholder { color: #909090; opacity: 1; }
+.login-options { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px 14px; margin: -5px 0 34px; font-size: 13px; }
+.login-options label { display: inline-flex; align-items: center; gap: 10px; min-height: 30px; color: #707070; cursor: pointer; }
+.login-options input { width: 18px; height: 18px; margin: 0; accent-color: #2012b4; }
+.text-link { padding: 6px 0; border: 0; background: transparent; color: #2012b4; font: inherit; cursor: pointer; }
+.text-link:hover { text-decoration: underline; }
+.text-link:focus-visible, summary:focus-visible, .login-options input:focus-visible { outline: 2px solid #2012b4; outline-offset: 4px; }
+.login-btn { width: 100%; min-height: 55px; margin: 8px 0 0; font-size: 16px; font-weight: 400; }
+.demo-access { margin-top: 20px; color: #6b6b6b; font-size: 11px; }
+.demo-access summary { width: fit-content; cursor: pointer; padding: 6px 0; }
+.demo-credentials { margin-top: 8px; padding: 12px; border-radius: 6px; background: #f6f5fc; }
+.demo-credentials small { display: block; margin-bottom: 6px; font-size: 11px; line-height: 1.5; overflow-wrap: anywhere; }
+.demo-credentials .text-link { font-size: 12px; }
+footer { margin-top: auto; padding-top: 60px; color: #737373; font-size: 11px; line-height: 1.5; text-align: center; }
+@media (max-width: 900px) {
+  .login-wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 52%); padding-left: 24px; }
+  .login-brand { padding-right: 20px; }
+  .brand-eyebrow { padding-inline: 12px; font-size: 9px; }
+  .desktop-break { display: none; }
+  .login-form { padding-inline: 28px; border-radius: 0 60px 0 60px; }
+  h2 { font-size: 30px; }
+}
+@media (max-width: 700px) {
+  .login-wrap { display: flex; flex-direction: column; padding: 0; }
+  .login-brand { padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) 32px max(24px, env(safe-area-inset-left)); }
+  .brand-lockup { font-size: 16px; }
+  .brand-lockup img { width: 38px; height: 38px; }
+  .brand-message { padding-top: 48px; }
+  .brand-eyebrow { font-size: 10px; }
+  h1 { margin-top: 18px; font-size: clamp(25px, 5.6vw, 36px); letter-spacing: -.7px; }
+  .brand-message p { font-size: 13px; }
+  .login-form { flex: 1; padding: 38px max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); border-radius: 0 48px 0 0; }
+  h2 { font-size: clamp(27px, 6.4vw, 34px); letter-spacing: -1px; }
+  .form-intro { margin-bottom: 30px; font-size: 14px; }
+  .login-options { margin-bottom: 20px; font-size: 12px; }
+  footer { padding-top: 38px; }
+}
+
+@media(max-width:700px) {
+ .login-wrap { background-position:center top; background-size:auto 55vh; background-repeat:no-repeat; background-color:#171830; overflow:hidden; }
+ .login-brand { min-height:50vh; padding:20px 22px 32px; }
+ .brand-lockup { font-size:16px; gap:7px; }
+ .brand-lockup img { width:32px; height:32px; border-radius:8px; }
+ .brand-message { padding-top:160px; margin-inline:-12px; }
+ .brand-eyebrow,.brand-message p { display:none; }
+ h1 { font-size:18px; line-height:1.3; font-weight:400; letter-spacing:-.5px; margin:0; }
+ .login-form { position:relative; isolation:isolate; margin-top:-14px; min-height:50vh; padding:52px 30px 12px; border-radius:0; background:transparent; }
+ .login-form::before { content:''; position:absolute; z-index:-1; inset:0 0 -24px; background:#fff; transform:skewY(-3deg); transform-origin:top right; border-radius:clamp(54px,18vw,72px) clamp(54px,18vw,72px) 0 0; }
+ .form-inner,footer { position:relative; }
+ h2 { text-align:center; font-size:26px; letter-spacing:-.8px; }
+ .form-intro { font-size:10px; text-align:center; margin:4px 0 26px; }
+ .form-col { gap:6px; margin-bottom:16px; }
+ .field-label { font-size:10px; }
+ .field { min-height:39px; padding:10px; font-size:16px; }
+ .field::placeholder { font-size:12px; }
+ .login-options { font-size:10px; margin-top:-5px; margin-bottom:12px; gap:8px; }
+ .login-options label { gap:8px; }
+ .login-options input { width:12px; height:12px; }
+ .login-btn { min-height:39px; margin:0; font-size:13px; }
+ .demo-access { font-size:9px; margin-top:8px; }
+ footer { padding-top:24px; font-size:9px; }
+}

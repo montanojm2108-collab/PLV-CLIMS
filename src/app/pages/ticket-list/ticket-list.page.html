@@ -1,0 +1,18 @@
+<app-page-header title="Tickets"></app-page-header>
+<ion-content><main class="page-wrap student-page tickets-page">
+  <header class="tickets-heading"><div><h1 class="page-title">Tickets</h1><p class="page-subtitle">All reported issues across laboratories</p></div><button class="btn report-issue" *ngIf="auth.role()==='technical'" (click)="router.navigateByUrl('/technical/tickets/new')"><span aria-hidden="true">+</span> REPORT AN ISSUE</button></header>
+  <div class="ticket-filters">
+    <div class="search-field"><ion-icon name="search-outline" aria-hidden="true"></ion-icon><input [(ngModel)]="query" placeholder="Search ticket, PC, or laboratory" aria-label="Search tickets"></div>
+    <select class="field" [(ngModel)]="dateRange" aria-label="Reported date"><option value="all">All Dates</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option></select>
+    <button class="filter-button" (click)="showFilters=!showFilters" [attr.aria-expanded]="showFilters" aria-controls="ticket-extra-filters"><ion-icon name="options-outline"></ion-icon> Filters <span *ngIf="priority!=='All' || scope==='mine'">&#9679;</span></button>
+  </div>
+  <div class="extra-filters" id="ticket-extra-filters" *ngIf="showFilters"><label>Priority<select class="field" [(ngModel)]="priority"><option>All</option><option>Low</option><option>Medium</option><option>High</option></select></label><label>Reported by<select class="field" [(ngModel)]="scope"><option value="all">Everyone</option><option value="mine">Me</option></select></label></div>
+  <div class="tickets-toolbar"><div class="status-tabs" aria-label="Ticket status"><button *ngFor="let s of statuses" (click)="status=s" [class.active]="status===s" [attr.aria-pressed]="status===s">{{s}} <span>{{total(s)}}</span></button></div><button class="sort-button" (click)="newest=!newest">Sort: {{newest?'Newest first':'Oldest first'}} <span aria-hidden="true">&#8595;</span></button></div>
+  <div class="ticket-list">
+    <article class="ticket-card" *ngFor="let t of tickets">
+      <div class="ticket-main"><span class="ticket-icon" [class.resolved]="resolved(t)" [class.in-progress]="t.status==='In progress'"><ion-icon name="ticket-outline"></ion-icon></span><div class="ticket-info"><h2>{{t.id}} &middot; {{t.category}}</h2><p>{{lab(t.labId)?.name || t.labId}} &middot; {{computer(t.computerId)?.name || t.computerId}}</p></div><div class="ticket-actions"><span class="ticket-badge" [class.resolved]="resolved(t)" [class.in-progress]="t.status==='In progress'">{{resolved(t)?'Resolved':t.status==='In progress'?'In Progress':'Unresolved'}}</span><button class="btn btn-sm" (click)="go(t.id)" [attr.aria-label]="'View details for '+t.id">View Details &rsaquo;</button></div></div>
+      <footer><span class="ticket-location"><ion-icon name="business-outline" aria-hidden="true"></ion-icon>{{lab(t.labId)?.building}} &middot; {{lab(t.labId)?.room}}</span><span>Reported: &nbsp; {{t.createdAt | date:'MMMM d, y'}}</span></footer>
+    </article>
+    <p class="empty" *ngIf="!tickets.length">No tickets match your search.</p>
+  </div>
+</main></ion-content>

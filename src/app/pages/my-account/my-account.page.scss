@@ -1,0 +1,59 @@
+:host{display:flex;flex-direction:column;min-height:0}
+ion-content { --background:#fff; }
+.account-page .page-subtitle { margin-bottom:28px; }
+.account-grid { display:grid; grid-template-columns:minmax(0,1.9fr) minmax(240px,1fr); gap:20px 18px; }
+.account-grid .panel { padding:19px 18px 18px; margin:0; border:1px solid #c8c8c8; border-radius:10px; box-shadow:0 0 0 1px #eee; }
+.account-grid h2 { font-size:16px; font-weight:600; margin:0 0 17px; }
+.photo-row { display:flex; align-items:center; gap:16px; margin-bottom:18px; }
+.profile-avatar { display:flex; align-items:center; justify-content:center; width:64px; height:64px; object-fit:cover; border:2px solid #2012b4; border-radius:50%; }
+.avatar-initial { font-size:26px; color:#2012b4; background:#eee9fa; }
+.photo-button { width:178px; font-size:11px; min-height:35px; }
+.visually-hidden { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.account-grid .field-label { font-size:10px; color:#777; font-weight:400; }
+.account-grid .field { min-height:33px; padding:8px 12px; font-size:11px; }
+.account-grid .field:disabled { background:#fcfcfc; color:#999; border-color:#e8e8e8; }
+.save-button { min-width:150px; margin-top:16px; min-height:33px; padding:8px 16px; font-size:11px; }
+.sessions-panel { display:flex; flex-direction:column; }
+.session-row { display:flex; align-items:center; gap:10px; margin:10px 0 20px; font-size:11px; color:#777; }
+.session-dot { width:7px; height:7px; background:#24b23b; border-radius:50%; }
+.session-row small { margin-left:auto; font-size:10px; color:#777; }
+.session-note { font-size:12px!important; line-height:1.7; }
+.sessions-panel .btn { margin-top:auto; align-self:flex-start; font-size:11px; min-height:33px; padding:7px 11px; }
+.security-panel { grid-column:1/-1; }
+.security-panel .form-col { margin-bottom:15px; }
+.password-control,.notification-preference { display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; min-height:34px; padding:8px 12px; border:1px solid #ccc; border-radius:6px; background:#fff; color:#201420; font-size:11px; }
+.password-control { cursor:pointer; }
+.password-control span:last-child { color:#2012b4; }
+.notification-preference { margin-top:6px; }
+.notification-preference input { appearance:none; flex:0 0 34px; width:34px; height:20px; border:1px solid #ddd; border-radius:20px; position:relative; background:#eee; cursor:pointer; }
+.notification-preference input::after { content:''; position:absolute; width:14px; height:14px; top:2px; left:2px; background:#777; border-radius:50%; transition:transform .15s; }
+.notification-preference input:checked { background:#eeebff; }
+.notification-preference input:checked::after { background:#2012b4; transform:translateX(14px); }
+.notification-preference input:focus-visible { outline:2px solid #2012b4; outline-offset:3px; }
+@media(max-width:800px) { .account-grid { grid-template-columns:1fr; } .security-panel { grid-column:auto; } .sessions-panel .btn { margin-top:20px; } }
+
+.mobile-profile-name { display:none; }
+@media(max-width:550px) {
+ .student-page.account-page { padding:12px 24px 24px; }
+ .student-page .page-title { font-size:23px; }
+ .student-page .page-subtitle { font-size:12px; line-height:1.4; margin-bottom:20px; max-width:270px; }
+ .account-grid { gap:0; }
+ .profile-panel { order:1; }
+ .account-grid .profile-panel { border-bottom:0; border-radius:7px 7px 0 0; box-shadow:none; padding:14px 14px 10px; }
+ .account-grid .security-panel { order:2; border-top:0; border-radius:0 0 7px 7px; box-shadow:none; padding:16px 14px 20px; }
+ .account-grid .sessions-panel { order:3; margin-top:10px; padding:22px 20px; }
+ .account-grid h2 { font-size:13px; margin-bottom:14px; }
+ .photo-row { display:grid; grid-template-columns:74px minmax(0,1fr); gap:10px; margin-bottom:18px; }
+ .profile-avatar { width:74px; height:74px; }
+ .mobile-profile-name { display:block; }
+ .mobile-profile-name strong { display:block; font-size:12px; }
+ .mobile-profile-name small { display:block; font-size:10px; margin-top:4px; }
+ .photo-button { grid-column:1/-1; width:100%; min-height:30px; font-size:10px; }
+ .account-grid .form-grid { grid-template-columns:1fr; gap:10px; }
+ .role-field { display:none; }
+ .account-grid .field { min-height:32px; font-size:12px; }
+ .account-grid .field-label { font-size:9px; }
+ .account-grid .save-button { width:100%; min-height:30px; font-size:10px; }
+ .security-panel .notification-preference { font-size:10px; }
+ .password-control { min-height:32px; }
+}

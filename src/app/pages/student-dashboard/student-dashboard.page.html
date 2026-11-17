@@ -1,0 +1,36 @@
+<app-page-header title="Dashboard"></app-page-header>
+<ion-content>
+  <main class="page-wrap student-page dashboard-page">
+    <div class="dashboard-search search-field">
+      <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+      <input [(ngModel)]="query" placeholder="Search room, functionality" aria-label="Search laboratory availability">
+    </div>
+    <section class="panel availability-panel">
+      <div class="section-heading">
+        <div><h1>Laboratory Availability</h1><p>Current status of all computer laboratories.</p></div>
+        <button class="text-action" (click)="go('/student/laboratories')"><span class="desktop-view-label">View All Laboratories</span><span class="mobile-view-label">View All</span> <span aria-hidden="true">&rsaquo;</span></button>
+      </div>
+      <div class="table-scroll">
+        <table class="availability-table">
+          <thead><tr><th>Laboratory</th><th>Location</th><th>Total PCs</th><th>Status</th></tr></thead>
+          <tbody><tr *ngFor="let lab of labs">
+            <td><button class="lab-name-link" (click)="go('/student/laboratories/'+lab.id)"><span class="computer-icon"><ion-icon name="desktop-outline"></ion-icon></span><span>{{lab.name}}<small class="mobile-lab-location">{{lab.building}} &middot; {{lab.room}}</small></span></button></td>
+            <td>{{lab.building}} &middot; {{lab.room}}</td><td>{{count(lab.id)}}</td>
+            <td><span class="availability-badge" [class.unavailable]="status(lab)==='Unavailable'" [class.in-use]="status(lab)==='In Use'">&#9679; {{status(lab)}}</span></td>
+          </tr></tbody>
+        </table>
+      </div>
+      <p class="empty" *ngIf="!labs.length">No laboratories match your search.</p>
+    </section>
+    <section class="panel notification-panel">
+      <div class="section-heading"><div><h2>Notification</h2><p>Important updates and reminders from the IT Office.</p></div></div>
+      <button class="notification-row" *ngFor="let a of announcements" (click)="go('/announcements')">
+        <span class="notification-icon"><ion-icon name="calendar-outline"></ion-icon></span>
+        <span><strong>{{a.title}}</strong><span class="notification-body">{{a.body}}</span><small>{{a.date | date:'MMM d, y'}}</small></span>
+        <span class="row-chevron" aria-hidden="true">&rsaquo;</span>
+      </button>
+      <p class="empty" *ngIf="!announcements.length">No notifications yet.</p>
+      <button class="text-action all-notifications" (click)="go('/announcements')">View all notifications &rsaquo;</button>
+    </section>
+  </main>
+</ion-content>
