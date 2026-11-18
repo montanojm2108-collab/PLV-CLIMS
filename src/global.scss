@@ -109,9 +109,9 @@ ion-modal.logout-confirmation-modal {
  --box-shadow:0 12px 48px #0002;
 }
 ion-modal.ticket-details-modal {
- --width:620px;
+ --width:700px;
  --max-width:calc(100vw - 32px);
- --height: min(760px, calc(100dvh - 64px));
+ --height: min(560px, calc(100dvh - 64px));
  --border-radius:24px;
  --box-shadow:0 12px 48px #0002;
  --backdrop-opacity:.5;
@@ -119,4 +119,7 @@ ion-modal.ticket-details-modal {
 ion-modal.ticket-details-modal::part(backdrop) { background:#000; }
 @media(max-width:550px) {
  ion-modal.ticket-details-modal { --max-width:calc(100vw - 20px); --height:calc(100dvh - 32px); --border-radius:18px; }
+@media(max-width:700px) { ion-modal.pc-details-modal { --width:100%; --height:88dvh; --border-radius:24px 24px 0 0; align-items:flex-end; } }
+@media(max-width:700px) { ion-modal.mobile-report-modal { --width:100%; --height:96dvh; --border-radius:24px 24px 0 0; align-items:flex-end; } }
+@media(min-width:701px) { ion-modal.mobile-report-modal { --width:min(560px, calc(100vw - 40px)); --height:auto; --max-height:calc(100dvh - 40px); --border-radius:20px; } }
 }

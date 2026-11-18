@@ -1,15 +1,15 @@
-<app-page-header [title]="auth.role()!=='admin'?'Notification':'Announcements'">
+<app-page-header title="Announcements">
 </app-page-header>
 <ion-content>
 <main class="page-wrap" [class.student-page]="auth.role()!=='admin'">
-<h1 class="page-title">{{auth.role()!=='admin'?'Notification':'Announcements'}}</h1>
+<h1 class="page-title">Announcements</h1>
 <p class="page-subtitle">Latest laboratory notices and service updates.</p>
 <section class="panel">
 <div class="toolbar-row">
-<h2>All notifications</h2>
+<h2>All announcements</h2>
 <button class="btn secondary" (click)="markAll()">Mark all as read</button>
 </div>
-<input class="field" [(ngModel)]="query" placeholder="Search notifications...">
+<input class="field" [(ngModel)]="query" placeholder="Search announcements...">
 <div class="record-list" style="margin-top:15px">
 <div class="record" *ngFor="let a of items">
 <div class="details">
@@ -18,7 +18,7 @@
 </div>
 <button class="btn btn-sm" (click)="open(a.id)">View details</button>
 </div>
-<p class="empty" *ngIf="!items.length">No notifications found.</p>
+<p class="empty" *ngIf="!items.length">No announcements found.</p>
 </div>
 </section>
 </main>

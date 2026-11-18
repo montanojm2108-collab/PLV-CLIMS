@@ -2,6 +2,7 @@
 .ticket-detail-content { --background:#f5f5f7; }
 .ticket-detail-wrap { display:flex; justify-content:center; align-items:flex-start; min-height:100%; padding:28px 20px; }
 .ticket-dialog { width:100%; max-width:612px; background:#fff; border-radius:14px; box-shadow:0 4px 24px #20142012; overflow:hidden; }
+:host.embedded-ticket .ticket-dialog { max-width:none; border-radius:18px; }
 .dialog-header { display:flex; align-items:center; gap:22px; padding:26px 28px 19px; border-bottom:1px solid #c7c7c7; }
 .dialog-header h1 { margin:0; font-size:23px; font-weight:500; }
 .detail-status { display:inline-flex; align-items:center; gap:5px; border:1px solid #ff5555; border-radius:20px; background:#fff2f2; color:#f00000; padding:5px 20px; font-size:10px; text-transform:uppercase; white-space:nowrap; }
@@ -47,4 +48,18 @@ button:focus-visible,summary:focus-visible { outline:2px solid #2012b4; outline-
 :host.embedded-ticket { height:100%; }
 :host.embedded-ticket .ticket-detail-content { --background:#fff; }
 :host.embedded-ticket .ticket-detail-wrap { padding:0; display:block; }
-:host.embedded-ticket .ticket-dialog { max-width:none; border-radius:0; box-shadow:none; }
+:host.embedded-ticket .ticket-dialog { max-width:none; border-radius:18px; box-shadow:none; }
+:host.embedded-ticket .ticket-detail-wrap { padding:0; }
+:host.embedded-ticket .dialog-header { padding:20px 22px 14px; }
+:host.embedded-ticket .dialog-body { padding:24px 22px 28px; }
+:host.embedded-ticket .ticket-facts { gap:14px 28px; margin-bottom:20px; }
+:host.embedded-ticket .ticket-facts dt,.ticket-detail-content .dialog-body h2 { font-size:10px; margin-bottom:5px; }
+:host.embedded-ticket .ticket-facts dd { font-size:11px; }
+:host.embedded-ticket .description-section p { font-size:10px; line-height:1.6; }
+:host.embedded-ticket .attachment img { width:104px; height:68px; border-radius:8px; }
+:host.embedded-ticket .attachment strong { font-size:10px; }
+:host.embedded-ticket .attachment small { font-size:9px; margin-top:4px; }
+:host.embedded-ticket .photo-section { margin-bottom:22px; }
+:host.embedded-ticket .close-button { display:none; }
+:host.embedded-ticket .observation-form .btn { min-width:112px; min-height:30px; padding:6px 10px; font-size:9px; }
+:host.embedded-ticket .observation-input input { font-size:9px; }

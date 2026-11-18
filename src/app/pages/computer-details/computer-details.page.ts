@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -10,6 +10,7 @@ import { PageHeaderComponent } from '../../shared/page-header.component';
 import { ComputerStatus, Ticket } from '../../core/models';
 @Component({ standalone: true, imports: [CommonModule, FormsModule, IonicModule, PageHeaderComponent], templateUrl: './computer-details.page.html', styleUrls: ['./computer-details.page.scss'] })
 export class ComputerDetailsPage implements OnInit {
+    @Input() computerId = '';
     data = inject(DataService);
     auth = inject(AuthService);
     ui = inject(UiService);
@@ -18,7 +19,7 @@ export class ComputerDetailsPage implements OnInit {
     id = '';
     status: ComputerStatus = 'Working';
     notes = '';
-    ngOnInit() { this.route.paramMap.subscribe(p => { this.id = p.get('id') || ''; this.status = this.computer?.status || 'Working'; this.notes = this.computer?.notes || ''; }); }
+    ngOnInit() { this.route.paramMap.subscribe(p => { this.id = p.get('id') || this.computerId; this.status = this.computer?.status || 'Working'; this.notes = this.computer?.notes || ''; }); if (this.computerId) this.id = this.computerId; }
     get computer() { return this.data.state().computers.find(c => c.id === this.id); }
     get lab() { return this.data.state().labs.find(l => l.id === this.computer?.labId); }
     get tickets() { return this.data.state().tickets.filter(t => t.computerId === this.id).sort((a, b) => b.createdAt.localeCompare(a.createdAt)); }

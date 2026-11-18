@@ -23,14 +23,14 @@
       <p class="empty" *ngIf="!labs.length">No laboratories match your search.</p>
     </section>
     <section class="panel notification-panel">
-      <div class="section-heading"><div><h2>Notification</h2><p>Important updates and reminders from the IT Office.</p></div></div>
-      <button class="notification-row" *ngFor="let a of announcements" (click)="go('/announcements')">
+      <div class="section-heading"><div><h2>Announcements</h2><p>Important updates and reminders from the IT Office.</p></div></div>
+      <div class="notification-row" *ngFor="let a of announcements">
         <span class="notification-icon"><ion-icon name="calendar-outline"></ion-icon></span>
         <span><strong>{{a.title}}</strong><span class="notification-body">{{a.body}}</span><small>{{a.date | date:'MMM d, y'}}</small></span>
-        <span class="row-chevron" aria-hidden="true">&rsaquo;</span>
-      </button>
-      <p class="empty" *ngIf="!announcements.length">No notifications yet.</p>
-      <button class="text-action all-notifications" (click)="go('/announcements')">View all notifications &rsaquo;</button>
+        <button class="btn btn-sm announcement-details" (click)="go('/announcements?id='+a.id)">View details</button>
+      </div>
+      <p class="empty" *ngIf="!announcements.length">No announcements yet.</p>
+      <button class="text-action all-notifications" (click)="go('/announcements')">View all announcements &rsaquo;</button>
     </section>
   </main>
 </ion-content>

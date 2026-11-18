@@ -1,13 +1,13 @@
-<app-page-header title="Create Ticket">
-</app-page-header>
+<header class="mobile-report-header" *ngIf="modalMode"><strong>Report an Issue</strong><button type="button" aria-label="Close" (click)="close()">×</button></header>
+<app-page-header *ngIf="!modalMode" title="Create Ticket"></app-page-header>
 <ion-content>
-<main class="page-wrap">
-<h1 class="page-title">Create Ticket</h1>
-<p class="page-subtitle">Report a computer issue and attach evidence.</p>
+<main class="page-wrap" [class.mobile-report-page]="modalMode">
+<h1 class="page-title" *ngIf="!modalMode">Create Ticket</h1>
+<p class="page-subtitle" *ngIf="!modalMode">Report a computer issue and attach evidence.</p>
 <section class="panel">
-<h2>Details and records</h2>
+<h2 *ngIf="!modalMode">Details and records</h2>
 <form [formGroup]="form" (ngSubmit)="submit()">
-<div class="form-grid">
+<div class="form-grid" [class.report-modal-grid]="modalMode">
 <div class="form-col">
 <label class="field-label">Laboratory</label>
 <select class="field" formControlName="labId" (change)="labChanged()">
@@ -53,11 +53,12 @@
 <img *ngIf="photo" [src]="photo" alt="Evidence preview" class="photo-preview">
 </div>
 </div>
-<div class="notice" *ngIf="duplicate">{{duplicate}}</div>
+<div class="duplicate-check" *ngIf="modalMode"><button class="check-duplicates" type="button" (click)="check()">⌕ &nbsp; Check for duplicates</button><div class="duplicate-result" *ngIf="duplicate" [class.possible]="duplicateMatch"><strong>{{duplicate}}</strong><small *ngIf="duplicateMatch">{{duplicateMatch.id}} · {{duplicateMatch.category}} · {{computerName(duplicateMatch.computerId)}}. Check before submitting a new report.</small><small *ngIf="!duplicateMatch">No unresolved ticket matches this PC and issue. You can submit.</small></div></div>
+<div class="notice" *ngIf="duplicate && !modalMode">{{duplicate}}</div>
 <div class="btn-row">
-<button class="btn secondary" type="button" (click)="check()">Check for duplicates</button>
-<button class="btn secondary" type="button" (click)="router.navigateByUrl('/technical/tickets')">Cancel</button>
-<button class="btn" type="submit">Submit ticket</button>
+<button class="btn secondary" *ngIf="!modalMode" type="button" (click)="check()">Check for duplicates</button>
+<button class="btn secondary" *ngIf="!modalMode" type="button" (click)="router.navigateByUrl('/technical/tickets')">Cancel</button>
+<button class="btn" type="submit">Submit Ticket</button>
 </div>
 </form>
 </section>

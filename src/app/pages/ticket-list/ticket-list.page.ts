@@ -34,6 +34,7 @@ export class TicketListPage {
     priority = 'All';
     get tickets() { return this.matchingTickets.filter(t => this.matchesStatus(t,this.status)).sort((a,b) => a.createdAt.localeCompare(b.createdAt) * (this.newest ? -1 : 1)); }
     modal = inject(ModalController);
+    async openReport() { const dialog = await this.modal.create({ component: (await import('../create-ticket/create-ticket.page')).CreateTicketPage, componentProps: { modalMode: true }, cssClass: 'mobile-report-modal' }); await dialog.present(); }
     private openingTicket = false;
     async go(id: string) {
         if (this.openingTicket) return;

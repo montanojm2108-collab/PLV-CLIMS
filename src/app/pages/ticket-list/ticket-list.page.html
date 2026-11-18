@@ -1,6 +1,6 @@
 <app-page-header title="Tickets"></app-page-header>
 <ion-content><main class="page-wrap student-page tickets-page">
-  <header class="tickets-heading"><div><h1 class="page-title">Tickets</h1><p class="page-subtitle">All reported issues across laboratories</p></div><button class="btn report-issue" *ngIf="auth.role()==='technical'" (click)="router.navigateByUrl('/technical/tickets/new')"><span aria-hidden="true">+</span> REPORT AN ISSUE</button></header>
+  <header class="tickets-heading"><div><h1 class="page-title">Tickets</h1><p class="page-subtitle">All reported issues across laboratories</p></div><button class="btn report-issue" *ngIf="auth.role()==='technical'" (click)="openReport()"><span aria-hidden="true">+</span> REPORT AN ISSUE</button></header>
   <div class="ticket-filters">
     <div class="search-field"><ion-icon name="search-outline" aria-hidden="true"></ion-icon><input [(ngModel)]="query" placeholder="Search ticket, PC, or laboratory" aria-label="Search tickets"></div>
     <select class="field" [(ngModel)]="dateRange" aria-label="Reported date"><option value="all">All Dates</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option></select>

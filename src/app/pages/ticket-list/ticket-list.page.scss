@@ -33,4 +33,35 @@ ion-content { --background:#fff; }
 .ticket-card footer { display:flex; justify-content:space-between; align-items:center; gap:12px; border-top:1px solid #ccc; padding-top:11px; font-size:10px; color:#8a8599; }
 .ticket-location { display:flex; align-items:center; gap:9px; }
 .ticket-location ion-icon { color:#2012b4; font-size:16px; }
-@media(max-width:700px) { .tickets-heading { flex-wrap:wrap; gap:0; } .ticket-filters { grid-template-columns:1fr 1fr; } .ticket-filters .search-field { grid-column:1/-1; } .filter-button { min-height:44px; } .ticket-main { flex-wrap:wrap; } .ticket-actions { width:100%; justify-content:flex-end; } .ticket-card footer { flex-wrap:wrap; } .tickets-toolbar { align-items:flex-start; } }
+@media(max-width:700px) {
+ .student-page.tickets-page { padding:8px 16px 24px; }
+ .tickets-heading { flex-wrap:wrap; gap:0; }
+ .tickets-heading .page-title { font-size:18px; }
+ .tickets-heading .page-subtitle { font-size:10px; margin-bottom:10px; }
+ .report-issue { display:none; }
+ .ticket-filters { grid-template-columns:1fr 1fr; gap:5px; }
+ .ticket-filters .search-field { grid-column:1/-1; min-height:30px; padding:0 10px; gap:7px; }
+ .ticket-filters .search-field ion-icon { font-size:14px; }
+ .ticket-filters .search-field input { font-size:9px; padding:6px 0; }
+ .ticket-filters .field,.filter-button { min-height:24px; font-size:8px; padding:4px 8px; }
+ .filter-button { gap:8px; }
+ .extra-filters { justify-content:flex-end; gap:6px; padding:7px 0 2px; }
+ .extra-filters label { display:flex; flex-direction:column; align-items:flex-start; width:calc(50% - 3px); min-width:0; font-size:8px; }
+ .extra-filters select { width:100%; max-width:100%; min-height:30px; margin-top:3px; padding:5px 8px; font-size:9px; }
+ .tickets-toolbar { align-items:center; gap:4px; margin:10px 0 9px; }
+ .status-tabs { gap:3px; }
+ .status-tabs button { padding:3px 7px; font-size:7px; }
+ .sort-button { font-size:7px; }
+ .ticket-list { gap:7px; }
+ .ticket-card { padding:8px; border-radius:6px; }
+ .ticket-main { flex-wrap:nowrap; gap:7px; padding:0 0 7px; }
+ .ticket-icon { flex-basis:24px; height:24px; border-radius:4px; font-size:14px; }
+ .ticket-info h2 { font-size:9px; margin-bottom:2px; }
+ .ticket-info p { font-size:7px; }
+ .ticket-actions { width:auto; flex:0 0 auto; }
+ .ticket-actions .btn { display:none; }
+ .ticket-badge { font-size:6px; padding:3px 6px; }
+ .ticket-card footer { flex-wrap:nowrap; gap:4px; padding-top:6px; font-size:6px; }
+ .ticket-location { gap:3px; }
+ .ticket-location ion-icon { font-size:9px; }
+}

@@ -7,6 +7,8 @@ import { DataService } from '../../core/data.service';
 import { AuthService } from '../../core/auth.service';
 import { UiService } from '../../core/ui.service';
 import { PageHeaderComponent } from '../../shared/page-header.component';
+import { ModalController } from '@ionic/angular';
+import { ComputerDetailsPage } from '../computer-details/computer-details.page';
 @Component({ standalone: true, imports: [CommonModule, FormsModule, IonicModule, PageHeaderComponent], templateUrl: './lab-layout.page.html', styleUrls: ['./lab-layout.page.scss'] })
 export class LabLayoutPage implements OnInit {
     data = inject(DataService);
@@ -14,6 +16,7 @@ export class LabLayoutPage implements OnInit {
     ui = inject(UiService);
     route = inject(ActivatedRoute);
     router = inject(Router);
+    modal = inject(ModalController);
     labId = '';
     filter = 'All';
     query = '';
@@ -27,6 +30,11 @@ export class LabLayoutPage implements OnInit {
     get computers() { return this.all.filter(c => (this.filter === 'All' || c.status === this.filter) && c.name.toLowerCase().includes(this.query.toLowerCase())); }
     count(status: string) { return this.all.filter(c => c.status === status).length; }
     async go(id: string) { if (!this.editing) {
+        if (window.matchMedia('(max-width: 700px)').matches) {
+            const dialog = await this.modal.create({ component: ComputerDetailsPage, componentProps: { computerId: id }, cssClass: 'pc-details-modal', breakpoints: [0, 1], initialBreakpoint: 1 });
+            await dialog.present();
+            return;
+        }
         void this.router.navigateByUrl('/student/computers/' + id);
         return;
     } if (!this.firstSelected) {

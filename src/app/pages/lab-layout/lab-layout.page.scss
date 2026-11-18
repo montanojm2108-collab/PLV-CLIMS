@@ -19,4 +19,24 @@
 .computer-tile.unavailable { background:#fff3f3; color:#f00000; border-color:#ff5454; }
 .computer-tile:hover { transform:translateY(-2px); box-shadow:0 3px 10px #20142018; }
 .computer-tile.selected { outline:3px solid #2012b4; outline-offset:2px; }
-@media(max-width:600px) { .room-grid { grid-template-columns:repeat(2,minmax(0,1fr)); padding:20px 0; gap:10px; } .lab-summary { width:100%; max-width:280px; } .filter-fields { flex-wrap:wrap; } }
+@media(max-width:600px) {
+ .equipment-page { padding:12px 22px 32px; }
+ .back-bar { padding-bottom:0; margin:0 0 18px; border:0; }
+ .back-bar button { min-height:22px; font-size:10px; gap:6px; }
+ .back-bar span { font-size:22px; }
+ .equipment-heading { margin-bottom:16px; gap:8px; }
+ .equipment-heading h1 { font-size:20px; margin-bottom:3px; }
+ .equipment-heading p { font-size:12px; }
+ .room-grid { grid-template-columns:repeat(4,minmax(0,1fr)); padding:10px 0 24px; gap:10px 8px; }
+ .computer-tile { min-height:90px; padding:8px 3px; border-radius:5px; }
+ .computer-tile ion-icon { font-size:24px; margin-bottom:4px; }
+ .computer-tile strong { font-size:10px; }
+ .computer-tile span { font-size:8px; text-align:center; }
+ .room-marker { border-radius:8px; font-size:9px; padding:8px; margin:8px 0 12px; }
+ .map-toolbar { margin-bottom:8px; }
+ .status-summary { gap:6px; }
+ .total-pcs { font-size:10px; padding-right:8px; }
+ .equipment-badge { font-size:7px; padding:4px 6px; }
+ .lab-summary { width:100%; max-width:280px; }
+ .filter-fields { flex-wrap:wrap; }
+}

@@ -6,6 +6,7 @@ ion-menu,ion-menu::part(container),.menu-content { --background: white; --ion-ba
 .nav-link.selected { background:#2012b4; color:white; }
 .menu-footer { background:white; border-top:1px solid #ddd; }
 .logout { border-color:#2012b4; }
+.logout img { display:block; width:22px; height:22px; object-fit:contain; }
 
 .student-portal {
   ion-split-pane { --side-width: 215px; --side-min-width: 215px; --side-max-width: 215px; }
@@ -35,4 +36,6 @@ ion-menu,ion-menu::part(container),.menu-content { --background: white; --ion-ba
  .mobile-bottom-nav ion-icon { font-size:23px; }
  .mobile-bottom-nav a.active { color:#2012b4; }
  .mobile-bottom-nav a:focus-visible { outline:2px solid #2012b4; outline-offset:-3px; border-radius:6px; }
+ .mobile-report-button { position:absolute; left:50%; top:-22px; transform:translateX(-50%); display:flex; align-items:center; justify-content:center; width:56px; height:56px; border:0; border-radius:50%; background:#2012b4; color:#fff; font-size:34px; box-shadow:0 0 0 6px #eee, 0 3px 8px #0003; z-index:2; }
+ .mobile-report-button ion-icon { font-size:34px; }
 }
