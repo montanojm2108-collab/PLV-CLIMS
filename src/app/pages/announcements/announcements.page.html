@@ -14,9 +14,9 @@
 <div class="record" *ngFor="let a of items">
 <div class="details">
 <strong>{{a.title}}</strong>
+<p class="announcement-body">{{a.body}}</p>
 <small>{{a.category}} · {{a.date | date:'mediumDate'}} · {{read(a.id)?'Read':'Unread'}}</small>
 </div>
-<button class="btn btn-sm" (click)="open(a.id)">View details</button>
 </div>
 <p class="empty" *ngIf="!items.length">No announcements found.</p>
 </div>

@@ -27,7 +27,6 @@
       <div class="notification-row" *ngFor="let a of announcements">
         <span class="notification-icon"><ion-icon name="calendar-outline"></ion-icon></span>
         <span><strong>{{a.title}}</strong><span class="notification-body">{{a.body}}</span><small>{{a.date | date:'MMM d, y'}}</small></span>
-        <button class="btn btn-sm announcement-details" (click)="go('/announcements?id='+a.id)">View details</button>
       </div>
       <p class="empty" *ngIf="!announcements.length">No announcements yet.</p>
       <button class="text-action all-notifications" (click)="go('/announcements')">View all announcements &rsaquo;</button>
