@@ -1,56 +1,53 @@
-:host{display:flex;flex-direction:column;min-height:0}
-ion-content { --background: #fff; }
-.dashboard-page { padding-top: 36px; }
-.student-page.dashboard-page .dashboard-search { width: 100%; min-height: 56px; margin-bottom: 26px; border: 0; box-shadow: 0 4px 12px #0003; border-radius: 11px; }
-.section-heading { padding: 4px 10px 12px; }
-.availability-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 13px; }
-.availability-table th { background: #e5e7ff; color: #2012b4; padding: 12px; font-size: 15px; font-weight: 600; }
-.availability-table th:first-child { text-align:left; padding-left:44px; border-radius:12px 0 0 0; }
-.availability-table th:last-child { border-radius:0 12px 0 0; }
-.availability-table td { padding: 13px 12px; border-bottom: 1px solid #e8e8e8; }
-.lab-name-link { display:flex; gap:14px; align-items:center; border:0; background:none; color:inherit; font:inherit; font-size:15px; font-weight:600; text-align:left; cursor:pointer; }
-.notification-panel { margin-top:12px; }
-.notification-panel .section-heading h2 { font-size:30px; }
-.notification-panel .section-heading p { font-size:18px; }
-.notification-panel .notification-row strong { font-size:16px; }
-.notification-panel .notification-body,.notification-panel .notification-row small { font-size:14px; }
-.all-notifications { margin:12px 10px 0; font-size:14px; }
-.notification-row > span:nth-child(2) { flex:1; min-width:0; }
-.announcement-details { flex:0 0 auto; }
+:host { display:flex; flex-direction:column; min-height:0; }
+ion-content { --background:#fff; }
+.student-dashboard { padding-top:36px; }
+.student-page .dashboard-search { width:100%; min-height:56px; border:0; box-shadow:0 4px 12px #0003; border-radius:11px; margin-bottom:26px; }
+.lab-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-bottom:15px; }
+.lab-stat { display:flex; align-items:center; gap:18px; min-height:83px; padding:14px 20px; border-radius:8px; color:#fff; }
+.available-stat { background:linear-gradient(110deg,#29206d,#4b36ed); }
+.working-stat { background:linear-gradient(110deg,#f00000,#ff8b00); }
+.unavailable-stat { background:linear-gradient(110deg,#6920d4,#ca9bff); }
+.stat-icon { display:flex; align-items:center; justify-content:center; flex:0 0 54px; height:54px; border-radius:50%; background:#ffffff30; font-size:27px; }
+.lab-stat strong { display:block; font-size:26px; font-weight:500; }
+.lab-stat small { display:block; font-size:10px; margin-top:3px; }
+.dashboard-columns { display:grid; grid-template-columns:minmax(0,3fr) minmax(210px,1fr); gap:11px; }
+.dashboard-panel { border:1px solid #e6e6e6; padding:18px; min-width:0; min-height:450px; }
+.dashboard-panel h2 { font-size:16px; font-weight:500; margin:0 0 18px; }
+.panel-heading { display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+.overview-lab { display:flex; align-items:center; gap:12px; padding:17px 0; width:100%; background:none; border:0; border-bottom:1px solid #eee; text-align:left; font:inherit; color:inherit; cursor:pointer; }
+.overview-lab strong { display:block; font-size:14px; }
+.overview-lab small { display:block; color:#888; font-size:11px; margin-top:5px; }
+.overview-lab-details { flex:1; min-width:0; overflow-wrap:anywhere; }
+.overview-lab .computer-icon { flex-shrink:0; }
+.overview-lab:focus-visible { outline:2px solid #2012b4; outline-offset:3px; }
+.lab-summary { display:flex; flex-direction:column; align-items:flex-end; gap:4px; margin-left:auto; white-space:nowrap; }
+.working-pcs { font-size:10px; color:#239936; }
+.overview-lab .lab-availability { margin:0; color:#239936; font-size:10px; }
+.overview-lab .lab-availability.in-use { color:#ad7700; }
+.overview-lab .lab-availability.unavailable { color:#cf3434; }
+.dashboard-notice { display:block; width:100%; border-bottom:1px solid #eee; padding:0 0 16px; margin-bottom:16px; }
+.dashboard-notice strong { display:block; font-size:12px; margin:7px 0; }
+.dashboard-notice>span { font-size:11px; color:#888; line-height:1.6; }
+.dashboard-notice .notice-date { color:#8847cc; }
+@media(max-width:800px) { .lab-stat { padding:14px; gap:10px; } .stat-icon { flex-basis:36px; height:36px; font-size:22px; } .dashboard-columns { grid-template-columns:1fr; } .dashboard-panel { min-height:0; } }
 @media(max-width:700px) {
- .dashboard-page { padding-top:20px; }
- .availability-table { min-width:660px; }
- .section-heading { align-items:flex-start; }
-}
-
-.mobile-view-label,.mobile-lab-location { display:none; }
-@media(max-width:700px) {
- .student-page.dashboard-page { padding:8px 10px 24px; }
- .student-page.dashboard-page .dashboard-search { width:auto; margin:0 5px 30px; min-height:38px; padding:0 11px; border-radius:8px; }
+ .student-page.student-dashboard { padding:8px 10px 24px; }
+ .student-page.student-dashboard .dashboard-search { width:auto; margin:0 5px 30px; min-height:38px; padding:0 11px; border-radius:8px; }
  .dashboard-search input { font-size:12px; padding:10px 0; }
  .dashboard-search ion-icon { font-size:15px; }
- .student-page .availability-panel { padding:0; border:0; }
- .section-heading { position:relative; display:block; padding:0 0 8px; }
- .student-page .section-heading h1,.student-page .section-heading h2 { font-size:18px; letter-spacing:-.4px; }
- .student-page .section-heading p { font-size:12px; margin-top:10px; line-height:1.5; }
- .section-heading .text-action { position:absolute; top:6px; right:8px; font-size:12px; }
- .desktop-view-label { display:none; }
- .mobile-view-label { display:inline; }
- .availability-table { min-width:0; width:100%; font-size:11px; table-layout:fixed; }
- .availability-table th:nth-child(2),.availability-table th:nth-child(3),.availability-table td:nth-child(2),.availability-table td:nth-child(3) { display:none; }
- .availability-table th:first-child { width:68%; padding:10px 22px; font-size:13px; border-radius:14px 0 0 0; }
- .availability-table th:last-child { padding:10px 6px; font-size:13px; border-radius:0 14px 0 0; }
- .availability-table td { padding:16px 6px; height:68px; border:0; border-bottom:1px solid #f0f0f0; }
- .lab-name-link { gap:10px; font-size:11px; width:100%; padding:0 10px; }
+ .lab-stats { gap:8px; margin-bottom:20px; }
+ .lab-stat { flex-direction:column; align-items:flex-start; gap:6px; min-height:110px; padding:12px 10px; }
+ .stat-icon { flex:0 0 28px; width:28px; height:28px; font-size:18px; }
+ .lab-stat strong { font-size:22px; }
+ .lab-stat small { font-size:9px; line-height:1.4; }
+ .dashboard-columns { gap:24px; }
+ .dashboard-panel { padding:0 5px; border:0; }
+ .dashboard-panel h2 { font-size:18px; }
+ .overview-lab { gap:10px; min-height:68px; padding:14px 0; }
+ .overview-lab strong { font-size:12px; }
+ .overview-lab small { font-size:10px; line-height:1.5; }
  .student-page .computer-icon { flex-basis:32px; width:32px; height:32px; font-size:21px; }
- .mobile-lab-location { display:block; font-size:9px; font-weight:400; margin-top:6px; line-height:1.4; }
- .student-page .availability-badge { font-size:9px; min-width:80px; padding:5px 8px; }
- .student-page .notification-panel { margin-top:30px; border:0; padding:0; }
- .notification-panel .section-heading { text-align:left; }
- .notification-panel .section-heading h2 { font-size:24px; }
- .notification-panel .section-heading p { font-size:14px; margin-top:4px; }
- .notification-panel .notification-row strong { font-size:14px; }
- .notification-panel .notification-body,.notification-panel .notification-row small { font-size:12px; }
- .student-page .notification-row { padding-inline:14px; }
- .student-page .announcement-details { display:none; }
+ .working-pcs { font-size:10px; text-align:right; line-height:1.5; }
+ .dashboard-notice strong { font-size:14px; }
+ .dashboard-notice>span { font-size:12px; }
 }
