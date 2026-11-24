@@ -11,7 +11,7 @@
 .detail-status.in-progress { color:#d58200; border-color:#ffb247; background:#fff7e9; }
 .icon-close { margin-left:auto; border:0; background:none; color:#999; cursor:pointer; padding:4px; font-size:22px; line-height:1; }
 .dialog-body { padding:36px 26px 34px; }
-.ticket-facts { display:grid; grid-template-columns:1fr 1fr; gap:18px 34px; margin:0 3px 26px; }
+.ticket-facts { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:18px 34px; margin:0 3px 26px; }
 .ticket-facts .full { grid-column:1/-1; }
 .ticket-facts dt,.dialog-body h2 { margin:0 0 8px; font-size:13px; font-weight:400; color:#777; }
 .ticket-facts dd { margin:0; color:#141414; font-size:14px; line-height:1.5; overflow-wrap:anywhere; }
@@ -21,7 +21,7 @@
 .attachment img { width:138px; height:93px; border-radius:12px; object-fit:cover; background:#f2f3f5; }
 .attachment strong { display:block; font-size:14px; font-weight:400; }
 .attachment small { display:block; margin-top:8px; font-size:12px; color:#2012b4; }
-.no-photo { color:#999; font-size:12px; margin:0; }
+.no-photo { color:#777; font-size:14px; margin:0; }
 .photo-section { margin-bottom:30px; }
 .dialog-body .section-strip { border-radius:7px; color:#2012b4; background:#f5f2fc; font-size:10px; padding:7px 17px; text-transform:uppercase; margin:0 0 15px; }
 .observation-form { display:flex; gap:8px; }
@@ -31,11 +31,11 @@
 .observation-input:focus-within { outline:2px solid #2012b4; outline-offset:2px; }
 .observation-form .btn { min-height:33px; font-size:11px; min-width:156px; padding:8px 15px; }
 .close-button { width:100%; margin-top:17px; min-height:38px; font-size:13px; }
-.activity-history { margin-top:17px; color:#777; font-size:11px; }
+.activity-history { margin-top:20px; color:#666; font-size:14px; line-height:1.6; }
 .activity-history summary { cursor:pointer; width:fit-content; }
 .activity-history>div { padding:12px 3px; border-bottom:1px solid #eee; }
 .activity-history p { margin:0 0 5px; color:#333; white-space:pre-wrap; overflow-wrap:anywhere; }
-.activity-history small { font-size:10px; }
+.activity-history small { font-size:12px; }
 .admin-section { margin-bottom:24px; }
 .admin-section .field-label { font-size:11px; }
 .admin-save { margin-top:12px; font-size:11px; }
@@ -53,13 +53,32 @@ button:focus-visible,summary:focus-visible { outline:2px solid #2012b4; outline-
 :host.embedded-ticket .dialog-header { padding:20px 22px 14px; }
 :host.embedded-ticket .dialog-body { padding:24px 22px 28px; }
 :host.embedded-ticket .ticket-facts { gap:14px 28px; margin-bottom:20px; }
-:host.embedded-ticket .ticket-facts dt,.ticket-detail-content .dialog-body h2 { font-size:10px; margin-bottom:5px; }
-:host.embedded-ticket .ticket-facts dd { font-size:11px; }
-:host.embedded-ticket .description-section p { font-size:10px; line-height:1.6; }
+:host.embedded-ticket .ticket-facts dt,:host.embedded-ticket .dialog-body h2 { font-size:14px; margin-bottom:7px; line-height:1.5; }
+:host.embedded-ticket .ticket-facts dd { font-size:16px; line-height:1.6; }
+:host.embedded-ticket .description-section p { font-size:15px; line-height:1.7; }
 :host.embedded-ticket .attachment img { width:104px; height:68px; border-radius:8px; }
-:host.embedded-ticket .attachment strong { font-size:10px; }
-:host.embedded-ticket .attachment small { font-size:9px; margin-top:4px; }
+:host.embedded-ticket .attachment strong { font-size:15px; }
+:host.embedded-ticket .attachment small { font-size:13px; margin-top:6px; }
 :host.embedded-ticket .photo-section { margin-bottom:22px; }
 :host.embedded-ticket .close-button { display:none; }
-:host.embedded-ticket .observation-form .btn { min-width:112px; min-height:30px; padding:6px 10px; font-size:9px; }
-:host.embedded-ticket .observation-input input { font-size:9px; }
+:host.embedded-ticket .observation-form .btn { min-width:160px; min-height:44px; padding:10px 12px; font-size:14px; }
+:host.embedded-ticket .observation-input input { font-size:16px; padding:12px 0; }
+:host.embedded-ticket .detail-status { font-size:11px; padding:6px 12px; }
+:host.embedded-ticket .icon-close { width:44px; height:44px; flex-shrink:0; font-size:26px; }
+:host.embedded-ticket .dialog-header { gap:12px; }
+:host.embedded-ticket .ticket-facts>div { min-width:0; }
+:host.embedded-ticket .admin-section .field-label { font-size:14px; }
+:host.embedded-ticket .admin-section .field { min-width:0; min-height:44px; font-size:16px; }
+:host.embedded-ticket .admin-save { min-height:44px; font-size:14px; }
+@media(max-width:550px) {
+ :host.embedded-ticket .dialog-body { padding:22px 18px 28px; }
+ :host.embedded-ticket .ticket-facts { gap:18px 16px; }
+ :host.embedded-ticket .observation-form { flex-direction:column; }
+ :host.embedded-ticket .attachment { flex-wrap:wrap; }
+}
+@media(max-width:350px) {
+ :host.embedded-ticket .ticket-facts { grid-template-columns:minmax(0,1fr); }
+ :host.embedded-ticket .dialog-header { padding-inline:16px; gap:8px; }
+ :host.embedded-ticket .dialog-header h1 { font-size:20px; }
+ :host.embedded-ticket .detail-status { padding-inline:8px; font-size:10px; }
+}

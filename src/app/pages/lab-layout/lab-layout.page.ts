@@ -31,7 +31,7 @@ export class LabLayoutPage implements OnInit {
     count(status: string) { return this.all.filter(c => c.status === status).length; }
     async go(id: string) { if (!this.editing) {
         if (window.matchMedia('(max-width: 700px)').matches) {
-            const dialog = await this.modal.create({ component: ComputerDetailsPage, componentProps: { computerId: id }, cssClass: 'pc-details-modal', breakpoints: [0, 1], initialBreakpoint: 1 });
+            const dialog = await this.modal.create({ component: ComputerDetailsPage, componentProps: { computerId: id }, cssClass: 'pc-details-modal', breakpoints: [0, 1], initialBreakpoint: 1, handle: true });
             await dialog.present();
             return;
         }

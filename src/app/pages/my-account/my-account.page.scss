@@ -1,7 +1,8 @@
 :host{display:flex;flex-direction:column;min-height:0}
 ion-content { --background:#fff; }
 .account-page .page-subtitle { margin-bottom:28px; }
-.account-grid { display:grid; grid-template-columns:minmax(0,1.9fr) minmax(240px,1fr); gap:20px 18px; }
+.account-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:20px 18px; }
+.standalone-logout { margin-top:16px; min-height:44px; font-size:12px; }
 .account-grid .panel { padding:19px 18px 18px; margin:0; border:1px solid #c8c8c8; border-radius:10px; box-shadow:0 0 0 1px #eee; }
 .account-grid h2 { font-size:16px; font-weight:600; margin:0 0 17px; }
 .photo-row { display:flex; align-items:center; gap:16px; margin-bottom:18px; }
@@ -13,12 +14,6 @@ ion-content { --background:#fff; }
 .account-grid .field { min-height:33px; padding:8px 12px; font-size:11px; }
 .account-grid .field:disabled { background:#fcfcfc; color:#999; border-color:#e8e8e8; }
 .save-button { min-width:150px; margin-top:16px; min-height:33px; padding:8px 16px; font-size:11px; }
-.sessions-panel { display:flex; flex-direction:column; }
-.session-row { display:flex; align-items:center; gap:10px; margin:10px 0 20px; font-size:11px; color:#777; }
-.session-dot { width:7px; height:7px; background:#24b23b; border-radius:50%; }
-.session-row small { margin-left:auto; font-size:10px; color:#777; }
-.session-note { font-size:12px!important; line-height:1.7; }
-.sessions-panel .btn { margin-top:auto; align-self:flex-start; font-size:11px; min-height:33px; padding:7px 11px; }
 .account-logout { display:inline-flex; align-items:center; justify-content:center; gap:8px; }
 .security-panel { grid-column:1/-1; }
 .security-panel .form-col { margin-bottom:15px; }
@@ -31,10 +26,10 @@ ion-content { --background:#fff; }
 .notification-preference input:checked { background:#eeebff; }
 .notification-preference input:checked::after { background:#2012b4; transform:translateX(14px); }
 .notification-preference input:focus-visible { outline:2px solid #2012b4; outline-offset:3px; }
-@media(max-width:800px) { .account-grid { grid-template-columns:1fr; } .security-panel { grid-column:auto; } .sessions-panel .btn { margin-top:20px; } }
 
 .mobile-profile-name { display:none; }
 @media(max-width:550px) {
+ .standalone-logout { width:100%; }
  .student-page.account-page { padding:12px 24px 24px; }
  .student-page .page-title { font-size:23px; }
  .student-page .page-subtitle { font-size:12px; line-height:1.4; margin-bottom:20px; max-width:270px; }
@@ -42,11 +37,6 @@ ion-content { --background:#fff; }
  .profile-panel { order:1; }
  .account-grid .profile-panel { border-bottom:0; border-radius:7px 7px 0 0; box-shadow:none; padding:14px 14px 10px; }
  .account-grid .security-panel { order:2; border-top:0; border-radius:0 0 7px 7px; box-shadow:none; padding:16px 14px 20px; }
- .account-grid .sessions-panel { order:3; margin-top:10px; padding:22px 20px; }
- .account-grid .sessions-panel { margin-top:8px; padding:0; border:0; box-shadow:none; background:transparent; }
- .sessions-panel h2,.sessions-panel .session-row,.sessions-panel .session-note { display:none; }
- .sessions-panel .account-logout { display:flex; width:100%; min-height:38px; margin:0; align-self:stretch; border:1px solid #f00000; border-radius:7px; background:#fff; color:#f00000; font-size:10px; }
- .sessions-panel .account-logout ion-icon { font-size:14px; }
  .account-grid h2 { font-size:13px; margin-bottom:14px; }
  .photo-row { display:grid; grid-template-columns:74px minmax(0,1fr); gap:10px; margin-bottom:18px; }
  .profile-avatar { width:74px; height:74px; }

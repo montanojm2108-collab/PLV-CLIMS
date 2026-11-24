@@ -1,7 +1,7 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '../../core/data.service';
 import { AuthService } from '../../core/auth.service';
@@ -11,6 +11,8 @@ import { ComputerStatus, Ticket } from '../../core/models';
 @Component({ standalone: true, imports: [CommonModule, FormsModule, IonicModule, PageHeaderComponent], templateUrl: './computer-details.page.html', styleUrls: ['./computer-details.page.scss'] })
 export class ComputerDetailsPage implements OnInit {
     @Input() computerId = '';
+    private modalController = inject(ModalController);
+    close(): void { void this.modalController.dismiss(); }
     data = inject(DataService);
     auth = inject(AuthService);
     ui = inject(UiService);
@@ -36,8 +38,24 @@ export class ComputerDetailsPage implements OnInit {
         c.status = this.status;
         c.notes = this.notes;
     } }, this.auth.currentUser()?.name, 'Updated ' + this.id); await this.ui.toast('Computer details saved.', 'success'); }
-    async report() { if (this.auth.role() === 'technical') {
-        void this.router.navigate(['/technical/tickets/new'], { queryParams: { computer: this.id } });
-        return;
-    } await this.ui.toast('Only technical representatives may create issue tickets.', 'warning'); }
+    private openingReport = false;
+    async report() {
+        if (this.auth.role() !== 'technical') {
+            await this.ui.toast('Only technical representatives may create issue tickets.', 'warning');
+            return;
+        }
+        if (this.openingReport || !this.computer) return;
+        this.openingReport = true;
+        try {
+            const { CreateTicketPage } = await import('../create-ticket/create-ticket.page');
+            const dialog = await this.modalController.create({
+                component: CreateTicketPage,
+                componentProps: { modalMode: true, initialComputerId: this.id },
+                cssClass: 'mobile-report-modal'
+            });
+            await dialog.present();
+            const result = await dialog.onDidDismiss();
+            if (result.role === 'submitted' && this.computerId) await this.modalController.dismiss();
+        } finally { this.openingReport = false; }
+    }
 }

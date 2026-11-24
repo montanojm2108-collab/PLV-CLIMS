@@ -13,18 +13,18 @@
   </div>
   <div class="lab-list-toolbar">
     <div class="status-tabs" aria-label="Laboratory availability filters">
-      <button *ngFor="let s of statuses" [class.active]="availability===s" [attr.aria-pressed]="availability===s" (click)="availability=s">{{s}} <span>{{total(s)}}</span></button>
+      <button *ngFor="let s of statuses" [class.active]="availability===s" [attr.aria-pressed]="availability===s" (click)="availability=s">{{s === 'Unavailable' ? 'Unavailable PCs' : s}} <span>{{total(s)}}</span></button>
     </div>
     <button class="sort-button" (click)="descending=!descending">Sort: {{descending?'Z - A':'A - Z'}} <span aria-hidden="true">&#8597;</span></button>
   </div>
   <div class="laboratory-list">
-    <article class="laboratory-card" *ngFor="let lab of labs">
+    <a class="laboratory-card" *ngFor="let lab of labs" [routerLink]="['/student/laboratories', lab.id]" [attr.aria-label]="'Open '+lab.name">
       <span class="computer-icon"><ion-icon name="desktop-outline"></ion-icon></span>
       <div class="lab-details"><h2>{{lab.name}}</h2><p>{{lab.building}} &middot; {{lab.room}} &middot; {{count(lab.id)}} Computers</p>
         <div class="pc-counts"><span class="working-count">{{count(lab.id,'Working')}} Working</span><span class="repair-count">{{count(lab.id,'Repair')}} Under Maintenance</span><span class="unavailable-count">{{count(lab.id,'Unavailable')}} Unavailable</span></div>
       </div>
-      <div class="lab-actions"><span class="availability-badge" [class.unavailable]="status(lab)==='Unavailable'" [class.in-use]="status(lab)==='In Use'">&#9679; {{status(lab)}}</span><button class="btn btn-sm" (click)="go(lab.id)" [attr.aria-label]="'View details for '+lab.name">View Details <span aria-hidden="true">&rsaquo;</span></button></div>
-    </article>
+      <span class="availability-badge" [class.unavailable]="status(lab)==='Unavailable'" [class.in-use]="status(lab)==='In Use'">&#9679; {{status(lab)}}</span>
+    </a>
     <p class="empty" *ngIf="!labs.length">No laboratories match the filters.</p>
   </div>
   <p class="data-note">Availability reflects local laboratory records. Live occupancy is not connected.</p>

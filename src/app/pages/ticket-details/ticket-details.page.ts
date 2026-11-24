@@ -17,13 +17,13 @@ export class TicketDetailsPage implements OnInit {
     router = inject(Router);
     @Input() ticketId = '';
     @Input() @HostBinding('class.embedded-ticket') presentedAsModal = false;
-    modal = inject(ModalController);
+    modalController = inject(ModalController);
     id = '';
     status: TicketStatus = 'Open';
     assignee = '';
     updateText = '';
     photoOpen = false;
-    close() { if (this.presentedAsModal) { void this.modal.dismiss(); } else { void this.router.navigateByUrl('/technical/tickets'); } }
+    close() { if (this.presentedAsModal) { void this.modalController.dismiss(); } else { void this.router.navigateByUrl('/technical/tickets'); } }
     get reporter() { return this.data.state().users.find(u => u.id === this.ticket?.reporterId)?.name || this.ticket?.reporterId || 'Not recorded'; }
     get resolved() { return ['Resolved', 'Closed'].includes(this.ticket?.status || ''); }
     ngOnInit() { if (this.ticketId) { this.id = this.ticketId; this.status = this.ticket?.status || 'Open'; this.assignee = this.ticket?.assignee || ''; return; } this.route.paramMap.subscribe(p => { this.id = p.get('id') || ''; this.status = this.ticket?.status || 'Open'; this.assignee = this.ticket?.assignee || ''; this.updateText = ''; this.photoOpen = false; }); }

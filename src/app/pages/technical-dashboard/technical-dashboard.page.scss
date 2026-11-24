@@ -1,7 +1,7 @@
 :host { display:flex; flex-direction:column; min-height:0; }
 ion-content { --background:#fff; }
 .technical-dashboard { padding-top:36px; }
-.student-page .dashboard-search { width:100%; min-height:56px; border:0; box-shadow:0 4px 12px #0003; border-radius:11px; margin-bottom:40px; }
+.student-page .dashboard-search { width:100%; min-height:56px; border:0; box-shadow:0 4px 12px #0003; border-radius:11px; margin-bottom:26px; }
 .ticket-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-bottom:15px; }
 .ticket-stat { display:flex; align-items:center; gap:18px; min-height:83px; padding:14px 20px; border:0; border-radius:8px; color:#fff; text-align:left; font:inherit; cursor:pointer; }
 .active-stat { background:linear-gradient(110deg,#29206d,#4b36ed); }
@@ -17,10 +17,34 @@ ion-content { --background:#fff; }
 .overview-lab { display:flex; align-items:center; gap:12px; padding:17px 0; width:100%; background:none; border:0; border-bottom:1px solid #eee; text-align:left; font:inherit; color:inherit; cursor:pointer; }
 .overview-lab strong { display:block; font-size:14px; }
 .overview-lab small { display:block; color:#888; font-size:11px; margin-top:5px; }
+.overview-lab-details { flex:1; min-width:0; overflow-wrap:anywhere; }
+.overview-lab .computer-icon { flex-shrink:0; }
+.ticket-stat>span:last-child { min-width:0; overflow-wrap:anywhere; }
+.ticket-stat:focus-visible,.overview-lab:focus-visible { outline:2px solid #2012b4; outline-offset:3px; }
 .working-pcs { margin-left:auto; font-size:10px; color:#239936; }
 .dashboard-notice { display:block; width:100%; border:0; border-bottom:1px solid #eee; background:none; padding:0 0 16px; margin-bottom:16px; text-align:left; color:inherit; font:inherit; }
 .dashboard-notice strong { display:block; font-size:12px; margin:7px 0; }
 .dashboard-notice>span { font-size:11px; color:#888; line-height:1.6; }
 .dashboard-notice .notice-date { color:#8847cc; }
 @media(max-width:800px) { .ticket-stat { padding:14px; gap:10px; } .stat-icon { flex-basis:36px; height:36px; font-size:22px; } .dashboard-columns { grid-template-columns:1fr; } .dashboard-panel { min-height:0; } }
-@media(max-width:550px) { .ticket-stats { grid-template-columns:1fr; } .ticket-stat { min-height:72px; } .student-page .dashboard-search { margin-bottom:24px; } .working-pcs { max-width:75px; text-align:right; } }
+@media(max-width:700px) {
+ .student-page.technical-dashboard { padding:8px 10px 24px; }
+ .student-page.technical-dashboard .dashboard-search { width:auto; margin:0 5px 30px; min-height:38px; padding:0 11px; border-radius:8px; }
+ .dashboard-search input { font-size:12px; padding:10px 0; }
+ .dashboard-search ion-icon { font-size:15px; }
+ .ticket-stats { gap:8px; margin-bottom:20px; }
+ .ticket-stat { flex-direction:column; align-items:flex-start; gap:6px; min-height:110px; padding:12px 10px; }
+ .stat-icon { flex:0 0 28px; width:28px; height:28px; font-size:18px; }
+ .ticket-stat strong { font-size:22px; }
+ .ticket-stat small { font-size:9px; line-height:1.4; }
+ .dashboard-columns { gap:24px; }
+ .dashboard-panel { padding:0 5px; border:0; }
+ .dashboard-panel h2 { font-size:18px; }
+ .overview-lab { gap:10px; min-height:68px; padding:14px 0; }
+ .overview-lab strong { font-size:12px; }
+ .overview-lab small { font-size:10px; line-height:1.5; }
+ .student-page .computer-icon { flex-basis:32px; width:32px; height:32px; font-size:21px; }
+ .working-pcs { flex:0 0 75px; font-size:10px; text-align:right; line-height:1.5; }
+ .dashboard-notice strong { font-size:14px; }
+ .dashboard-notice>span { font-size:12px; }
+}

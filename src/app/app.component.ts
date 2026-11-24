@@ -7,12 +7,13 @@ import { addIcons } from 'ionicons';
 import { searchOutline, calendarOutline, optionsOutline, homeOutline, gridOutline, businessOutline, desktopOutline, ticketOutline, addCircleOutline, clipboardOutline, timeOutline, constructOutline, megaphoneOutline, peopleOutline, settingsOutline, personOutline, logOutOutline } from 'ionicons/icons';
 import { AuthService } from './core/auth.service';
 import { CreateTicketPage } from './pages/create-ticket/create-ticket.page';
+import { PageHeaderComponent } from './shared/page-header.component';
 interface NavLink {
     title: string;
     path: string;
     icon: string;
 }
-@Component({ selector: 'app-root', standalone: true, imports: [CommonModule, IonicModule, RouterLink, RouterLinkActive], templateUrl: './app.component.html', styleUrls: ['./app.component.scss'] })
+@Component({ selector: 'app-root', standalone: true, imports: [CommonModule, IonicModule, RouterLink, RouterLinkActive, PageHeaderComponent], templateUrl: './app.component.html', styleUrls: ['./app.component.scss'] })
 export class AppComponent {
     constructor() { addIcons({ searchOutline, calendarOutline, optionsOutline, homeOutline, gridOutline, businessOutline, desktopOutline, ticketOutline, addCircleOutline, clipboardOutline, timeOutline, constructOutline, megaphoneOutline, peopleOutline, settingsOutline, personOutline, logOutOutline }); }
     auth = inject(AuthService);

@@ -1,8 +1,9 @@
 :host{display:flex;flex-direction:column;min-height:0}
 ion-content { --background:#fff; }
+ion-content::part(scroll) { scrollbar-gutter: stable; }
 .lab-filters { display:grid; grid-template-columns:minmax(0,2.3fr) minmax(140px,1fr) minmax(130px,1fr); gap:9px; }
 .lab-filters .field { min-height:48px; font-size:13px; background:#fff; }
-.filter-button { display:flex; align-items:center; justify-content:center; gap:20px; background:#fff; border:1px solid #e4e4e4; border-radius:8px; color:#666; font:inherit; font-size:13px; cursor:pointer; }
+.filter-button { display:flex; align-items:center; justify-content:flex-start; gap:14px; padding-inline:18px; background:#fff; border:1px solid #e4e4e4; border-radius:8px; color:#666; font:inherit; font-size:13px; cursor:pointer; }
 .filter-button ion-icon { font-size:20px; }
 .extra-filters { display:flex; align-items:center; gap:16px; padding:16px 0; font-size:13px; }
 .extra-filters label { margin-left:auto; }
@@ -14,8 +15,8 @@ ion-content { --background:#fff; }
 .status-tabs span { margin-left:3px; }
 .sort-button { background:none; border:0; font-size:11px; color:#666; cursor:pointer; white-space:nowrap; }
 .laboratory-list { display:flex; flex-direction:column; gap:12px; }
-.laboratory-card { display:flex; align-items:center; gap:14px; min-height:102px; padding:20px; border:1px solid #d2d2d2; border-radius:9px; transition:border-color .15s,background .15s; }
-.laboratory-card:hover,.laboratory-card:focus-within { border-color:#6d55ff; background:#f6f3fc; }
+.laboratory-card { text-decoration:none; color:inherit; cursor:pointer; display:flex; align-items:center; gap:14px; min-height:102px; padding:20px; border:1px solid #d2d2d2; border-radius:9px; transition:border-color .15s,background .15s; }
+.laboratory-card:hover,.laboratory-card:focus-visible { border-color:#6d55ff; background:#f6f3fc; }
 .lab-details { flex:1; min-width:0; }
 .lab-details h2 { margin:0 0 4px; font-size:16px; font-weight:600; }
 .lab-details p { margin:0 0 8px; color:#7c778c; font-size:11px; }
@@ -23,15 +24,15 @@ ion-content { --background:#fff; }
 .pc-counts span::before { content:''; display:inline-block; width:6px; height:6px; border-radius:50%; margin-right:6px; background:#35b951; }
 .pc-counts .repair-count::before { background:#ff8800; }
 .pc-counts .unavailable-count::before { background:#f00000; }
-.lab-actions { display:flex; align-items:center; gap:10px; }
-.lab-actions .btn { font-size:11px; min-height:34px; }
-.lab-actions .availability-badge { font-size:9px; min-width:80px; padding:4px 9px; }
+.laboratory-card:focus-visible { outline:2px solid #2012b4; outline-offset:3px; }
+
+.laboratory-card .availability-badge { font-size:9px; min-width:80px; padding:4px 9px; }
 @media(max-width:800px) {
- .lab-filters { grid-template-columns:1fr 1fr; }
+ .lab-filters { grid-template-columns:repeat(2,minmax(0,1fr)); }
  .lab-filters .search-field { grid-column:1/-1; }
  .filter-button { min-height:44px; }
- .laboratory-card { flex-wrap:wrap; padding:16px; }
- .lab-actions { width:100%; justify-content:flex-end; }
+ .laboratory-card { padding:16px; }
+
  .lab-list-toolbar { align-items:flex-start; }
  .extra-filters { flex-wrap:wrap; }
 }
@@ -49,20 +50,21 @@ ion-content { --background:#fff; }
  .student-page .search-field input { font-size:12px; padding:9px 0; }
  .student-page .search-field ion-icon { font-size:15px; }
  .lab-filters .field,.filter-button { min-height:32px; font-size:10px; padding:6px 14px; }
- .filter-button { gap:18px; }
+ .filter-button { gap:10px; }
+ .filter-button ion-icon { font-size:15px; }
  .lab-list-toolbar { gap:4px; margin:20px 0 8px; align-items:center; }
  .status-tabs { gap:4px; }
- .status-tabs button { padding:4px 7px; font-size:8px; }
+ .status-tabs button { padding:4px 5px; font-size:8px; white-space:nowrap; }
  .sort-button { font-size:8px; padding:0; }
- .laboratory-list { gap:7px; }
- .laboratory-card { position:relative; min-height:80px; padding:26px 8px 10px; gap:8px; flex-wrap:nowrap; border-radius:7px; }
+ .laboratory-list { gap:12px; }
+ .laboratory-card { min-height:84px; padding:14px 10px; gap:8px; border-radius:7px; }
  .student-page .computer-icon { flex:0 0 30px; width:30px; height:30px; font-size:23px; }
  .lab-details h2 { font-size:11px; margin-bottom:4px; }
  .lab-details p { font-size:8px; margin-bottom:6px; }
  .pc-counts { gap:6px; font-size:7px; }
  .pc-counts span::before { width:5px; height:5px; margin-right:3px; }
- .lab-actions { width:auto; flex:0 0 auto; }
- .lab-actions .availability-badge { position:absolute; top:6px; left:8px; min-width:64px; padding:3px 7px; font-size:7px; }
- .lab-actions .btn { font-size:8px; padding:7px 8px; min-height:28px; }
+
+ .laboratory-card .availability-badge { flex-shrink:0; min-width:64px; padding:3px 7px; font-size:7px; }
+
  .data-note { font-size:9px; }
 }

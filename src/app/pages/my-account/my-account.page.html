@@ -10,7 +10,7 @@
         <ng-template #initials><span class="profile-avatar avatar-initial" aria-label="Profile initials">{{auth.currentUser()?.name?.charAt(0)}}</span></ng-template>
         <div class="mobile-profile-name"><strong>{{auth.currentUser()?.name}}</strong><small>{{auth.role()==='student'?'Student':auth.role()==='technical'?'Tech Representative':'Administrator'}}</small></div>
         <input #photoInput class="visually-hidden" type="file" accept="image/*" (change)="photo($event)" aria-label="Upload profile photo" tabindex="-1">
-        <button class="btn photo-button" type="button" (click)="photoInput.click()">&uarr; CHANGE PHOTO</button>
+        <button class="btn photo-button" type="button" (click)="photoInput.click()">CHANGE PHOTO</button>
       </div>
       <form [formGroup]="form" (ngSubmit)="save()">
         <div class="form-grid">
@@ -22,12 +22,6 @@
         <button class="btn save-button" type="submit">SAVE CHANGES</button>
       </form>
     </section>
-    <section class="panel sessions-panel">
-      <h2>Sessions</h2>
-      <div class="session-row"><span class="session-dot"></span><span>This browser / device</span><small>Current</small></div>
-      <p class="session-note">This demo stores your session on this device. Other devices are not tracked.</p>
-      <button class="btn danger account-logout" type="button" (click)="auth.confirmLogout()"><ion-icon name="log-out-outline" aria-hidden="true"></ion-icon><span>LOG OUT</span></button>
-    </section>
     <section class="panel security-panel">
       <h2>Security &amp; Preferences</h2>
       <div class="form-col"><label class="field-label" for="change-password">Password</label><button class="password-control" id="change-password" type="button" (click)="password()"><span aria-hidden="true">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span><span>Change password &rsaquo;</span></button></div>
@@ -38,5 +32,6 @@
       </form>
     </section>
   </div>
+  <button class="btn danger account-logout standalone-logout" type="button" (click)="auth.confirmLogout()"><ion-icon name="log-out-outline" aria-hidden="true"></ion-icon><span>LOG OUT</span></button>
   <p class="data-note">Demo profile and preferences are saved only on this device.</p>
 </main></ion-content>

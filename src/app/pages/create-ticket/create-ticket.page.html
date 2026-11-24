@@ -1,4 +1,4 @@
-<header class="mobile-report-header" *ngIf="modalMode"><strong>Report an Issue</strong><button type="button" aria-label="Close" (click)="close()">×</button></header>
+<header class="mobile-report-header" *ngIf="modalMode"><strong>Report an Issue</strong><button type="button" aria-label="Close report dialog" (click)="close()">&times;</button></header>
 <app-page-header *ngIf="!modalMode" title="Create Ticket"></app-page-header>
 <ion-content>
 <main class="page-wrap" [class.mobile-report-page]="modalMode">
@@ -8,57 +8,64 @@
 <h2 *ngIf="!modalMode">Details and records</h2>
 <form [formGroup]="form" (ngSubmit)="submit()">
 <div class="form-grid" [class.report-modal-grid]="modalMode">
-<div class="form-col">
-<label class="field-label">Laboratory</label>
-<select class="field" formControlName="labId" (change)="labChanged()">
-<option value="">Select laboratory</option>
-<option *ngFor="let l of data.state().labs" [value]="l.id">{{l.name}}</option>
-</select>
+  <div class="form-col">
+    <label class="field-label" for="report-lab">Laboratory <span class="required" aria-hidden="true">*</span></label>
+    <select id="report-lab" class="field" formControlName="labId" (change)="labChanged()" required>
+      <option value="">Select laboratory</option>
+      <option *ngFor="let l of data.state().labs" [value]="l.id">{{l.name}}</option>
+    </select>
+    <span class="error-text" *ngIf="form.controls.labId.touched && form.controls.labId.invalid">Select a laboratory.</span>
+  </div>
+  <div class="form-col">
+    <label class="field-label" for="report-computer">Computer ID <span class="required" aria-hidden="true">*</span></label>
+    <select id="report-computer" class="field" formControlName="computerId" (change)="clearDuplicate()" required>
+      <option value="">Select computer</option>
+      <option *ngFor="let c of computers" [value]="c.id">{{c.name}}</option>
+    </select>
+    <span class="error-text" *ngIf="form.controls.computerId.touched && form.controls.computerId.invalid">Select a computer.</span>
+  </div>
+  <div class="form-col" [class.full]="modalMode">
+    <label class="field-label" for="report-issue">Issue <span class="required" aria-hidden="true">*</span></label>
+    <select id="report-issue" class="field" formControlName="category" (change)="clearDuplicate()" required>
+      <option value="">Choose issue</option>
+      <option>No display</option><option>Keyboard issue</option><option>Mouse issue</option>
+      <option>Network issue</option><option>Won't boot</option><option>Other issue</option>
+    </select>
+    <span class="error-text" *ngIf="form.controls.category.touched && form.controls.category.invalid">Choose an issue.</span>
+  </div>
+  <div class="form-col" *ngIf="!modalMode">
+    <label class="field-label" for="report-priority">Priority</label>
+    <select id="report-priority" class="field" formControlName="priority"><option>Low</option><option>Medium</option><option>High</option></select>
+  </div>
+  <div class="form-col full">
+    <label class="field-label" for="report-description">Description</label>
+    <textarea id="report-description" class="field" formControlName="description" placeholder="Describe the observed problem (at least 8 characters)" required minlength="8"></textarea>
+    <span class="error-text" *ngIf="form.controls.description.touched && form.controls.description.invalid">Enter a description with at least 8 characters.</span>
+  </div>
+  <div class="form-col full">
+    <div class="attachment-heading"><label class="field-label" for="report-photo">Attach photo evidence</label><small>Optional &middot; Image up to 650 KB</small></div>
+    <label class="photo-upload" for="report-photo"><span aria-hidden="true">+</span> {{photoName || 'Upload Photo'}}
+      <input id="report-photo" class="upload-input" type="file" accept="image/*" (change)="file($event)" aria-label="Upload photo evidence">
+    </label>
+    <img *ngIf="photo" [src]="photo" alt="Evidence preview" class="photo-preview">
+  </div>
 </div>
-<div class="form-col">
-<label class="field-label">Computer ID</label>
-<select class="field" formControlName="computerId">
-<option value="">Select computer</option>
-<option *ngFor="let c of computers" [value]="c.id">{{c.name}}</option>
-</select>
+<div class="duplicate-check" *ngIf="modalMode">
+  <button class="check-duplicates" type="button" (click)="check()"><ion-icon name="search-outline" aria-hidden="true"></ion-icon> Check for duplicates</button>
+  <div class="duplicate-result" *ngIf="duplicate" [class.possible]="duplicateMatch" role="status">
+    <span class="duplicate-symbol" aria-hidden="true">{{duplicateMatch ? '!' : '&#10003;'}}</span>
+    <div><strong>{{duplicate}}</strong>
+      <small *ngIf="duplicateMatch">{{duplicateMatch.id}} &middot; {{duplicateMatch.category}} &middot; {{computerName(duplicateMatch.computerId)}}. Review the existing ticket before submitting.</small>
+      <small *ngIf="!duplicateMatch">No unresolved ticket matches this PC and issue. You can submit.</small>
+    </div>
+  </div>
 </div>
-<div class="form-col">
-<label class="field-label">Issue category</label>
-<select class="field" formControlName="category">
-<option value="">Choose category</option>
-<option>No display</option>
-<option>Keyboard issue</option>
-<option>Mouse issue</option>
-<option>Network issue</option>
-<option>Won't boot</option>
-<option>Other issue</option>
-</select>
-</div>
-<div class="form-col">
-<label class="field-label">Priority</label>
-<select class="field" formControlName="priority">
-<option>Low</option>
-<option>Medium</option>
-<option>High</option>
-</select>
-</div>
-<div class="form-col full">
-<label class="field-label">Issue description</label>
-<textarea class="field" formControlName="description" placeholder="Describe the observed problem (at least 8 characters)">
-</textarea>
-</div>
-<div class="form-col full">
-<label class="field-label">Attach photo evidence</label>
-<input class="field" type="file" accept="image/*" (change)="file($event)">
-<img *ngIf="photo" [src]="photo" alt="Evidence preview" class="photo-preview">
-</div>
-</div>
-<div class="duplicate-check" *ngIf="modalMode"><button class="check-duplicates" type="button" (click)="check()">⌕ &nbsp; Check for duplicates</button><div class="duplicate-result" *ngIf="duplicate" [class.possible]="duplicateMatch"><strong>{{duplicate}}</strong><small *ngIf="duplicateMatch">{{duplicateMatch.id}} · {{duplicateMatch.category}} · {{computerName(duplicateMatch.computerId)}}. Check before submitting a new report.</small><small *ngIf="!duplicateMatch">No unresolved ticket matches this PC and issue. You can submit.</small></div></div>
-<div class="notice" *ngIf="duplicate && !modalMode">{{duplicate}}</div>
+<div class="notice" *ngIf="duplicate && !modalMode" role="status">{{duplicate}}</div>
+<p class="reporter" *ngIf="modalMode">Reported by {{auth.currentUser()?.name}} &middot; Technical Representative</p>
 <div class="btn-row">
-<button class="btn secondary" *ngIf="!modalMode" type="button" (click)="check()">Check for duplicates</button>
-<button class="btn secondary" *ngIf="!modalMode" type="button" (click)="router.navigateByUrl('/technical/tickets')">Cancel</button>
-<button class="btn" type="submit">Submit Ticket</button>
+  <button class="btn secondary" *ngIf="!modalMode" type="button" (click)="check()">Check for duplicates</button>
+  <button class="btn secondary" type="button" (click)="modalMode ? close() : router.navigateByUrl('/technical/tickets')">Cancel</button>
+  <button class="btn" type="submit">Submit Ticket</button>
 </div>
 </form>
 </section>

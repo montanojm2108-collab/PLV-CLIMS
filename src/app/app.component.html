@@ -9,6 +9,7 @@
 <small>{{portal}}</small>
 </div>
 </div>
+    <app-page-header *ngIf="auth.role()==='admin'" [searchOnly]="true"></app-page-header>
     <nav aria-label="Main navigation">
 <ion-menu-toggle [autoHide]="!desktopMenuVisible" *ngFor="let link of links">
 <a class="nav-link" [routerLink]="link.path" routerLinkActive="selected" [class.selected]="(link.path === '/student/laboratories' && router.url.startsWith('/student/computers/')) || (link.path === '/technical/tickets' && (router.url.startsWith('/tickets/') || router.url.startsWith('/technical/tickets/')))" [routerLinkActiveOptions]="{exact:link.path !== '/student/laboratories'}">

@@ -1,4 +1,8 @@
 @use '../../shared/equipment';
+.overlay-actions { display:flex; justify-content:flex-end; flex:0 0 auto; padding:12px 12px 0; background:#fff; }
+.overlay-actions button { width:44px; height:44px; border:0; border-radius:8px; background:#f5f2fc; color:#2012b4; font:inherit; font-size:26px; cursor:pointer; }
+.overlay-page { padding:8px 14px 24px; }
+.overlay-page .equipment-heading { margin-bottom:16px; }
 .computer-title { display:flex; align-items:center; gap:28px; margin-bottom:3px; }
 .computer-title h1 { margin:0; }
 .report-button { display:flex; align-items:center; justify-content:center; gap:9px; min-width:195px; min-height:36px; font-size:12px; padding:8px 16px; border-radius:10px; margin-top:5px; }
@@ -38,3 +42,17 @@ tr:last-child td { border-bottom:0; }
 .empty { font-size:14px; }
 @media(max-width:850px) { .details-grid { grid-template-columns:1fr; } .history,.admin-controls { grid-column:auto; } }
 @media(max-width:550px) { .spec-columns { grid-template-columns:1fr; gap:0; } .history .table-scroll { padding:0; } .history table { min-width:580px; } .report-button { min-height:44px; } .computer-title { gap:16px; } }
+@media(max-width:700px) {
+ .overlay-page .spec-columns { grid-template-columns:minmax(0,1fr); gap:0; padding:0 6px; }
+ .overlay-page .spec-columns dl div { font-size:12px; padding:10px 0; }
+ .overlay-page .details-panel { padding:8px; }
+ .overlay-page .details-panel h2 { font-size:11px; padding:9px 10px; margin-bottom:6px; }
+ .overlay-page .computer-title { gap:10px; flex-wrap:wrap; }
+ .overlay-page .equipment-heading h1 { font-size:22px; }
+ .overlay-page .equipment-heading p { font-size:11px; }
+ .overlay-page .history { min-height:0; }
+ .overlay-page .history .table-scroll { padding:0; }
+ .overlay-page .history table { min-width:420px; font-size:11px; }
+ .overlay-page .history th,.overlay-page .history td { padding:10px 6px; }
+ .overlay-page .empty { font-size:12px; line-height:1.5; }
+}

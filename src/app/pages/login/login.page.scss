@@ -1,19 +1,20 @@
 :host { display: flex; flex-direction: column; height: 100%; }
-.login-content { --background: #171830; --overflow:hidden; }
+.login-content { --background: #171830; }
 .login-wrap {
   min-height: 100%;
-  height:100%;
-  overflow:hidden;
+  --inset-top: max(20px, env(safe-area-inset-top));
+  --inset-bottom: max(20px, env(safe-area-inset-bottom));
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 47.7%);
-  padding: max(20px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(35px, env(safe-area-inset-left));
+  padding: var(--inset-top) max(10px, env(safe-area-inset-right)) var(--inset-bottom) max(35px, env(safe-area-inset-left));
   background: linear-gradient(180deg, rgba(18, 19, 61, .73), rgba(12, 12, 25, .8)), url('/assets/campus.jpg') center / cover;
 }
 .login-brand { display: flex; flex-direction: column; min-width: 0; padding: 27px 28px 24px 0; color: #fff; }
 .brand-lockup { display: flex; align-items: center; gap: 10px; font-size: 18px; }
 .brand-lockup img { display: block; width: 42px; height: 42px; object-fit: contain; background: #fff; border-radius: 12px; }
 .mobile-wordmark { display:none; }
-.brand-message { margin-top: auto; padding-top: 120px; }
+.brand-message .mobile-tagline { display:none; }
+.brand-message { margin-top: auto; padding-top: clamp(24px, 10vh, 120px); }
 .brand-eyebrow { display: inline-block; padding: 6px 20px; border: 1px solid rgba(255, 255, 255, .8); border-radius: 24px; font-size: 11px; letter-spacing: .8px; text-transform: uppercase; }
 h1 { margin: 23px 0 16px; font-size: clamp(28px, 3.2vw, 46px); font-weight: 400; line-height: 1.26; letter-spacing: -1.2px; }
 .brand-message p { margin: 0; color: #d0ced2; font-size: 14px; line-height: 1.9; }
@@ -46,44 +47,50 @@ footer { margin-top: auto; padding-top: 60px; color: #737373; font-size: 11px; l
   .login-form { padding-inline: 28px; border-radius: 0 60px 0 60px; }
   h2 { font-size: 30px; }
 }
-@media (max-width: 700px) {
-  .login-wrap { display: flex; flex-direction: column; padding: 0; }
-  .login-brand { padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) 32px max(24px, env(safe-area-inset-left)); }
-  .brand-lockup { font-size: 16px; }
-  .brand-lockup img { width: 38px; height: 38px; }
-  .brand-message { padding-top: 48px; }
-  .brand-eyebrow { font-size: 10px; }
-  h1 { margin-top: 18px; font-size: clamp(25px, 5.6vw, 36px); letter-spacing: -.7px; }
-  .brand-message p { font-size: 13px; }
-  .login-form { flex: 1; padding: 38px max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left)); border-radius: 0 48px 0 0; }
-  h2 { font-size: clamp(27px, 6.4vw, 34px); letter-spacing: -1px; }
-  .form-intro { margin-bottom: 30px; font-size: 14px; }
-  .login-options { margin-bottom: 20px; font-size: 12px; }
-  footer { padding-top: 38px; }
+@media (min-width: 701px) {
+  .login-brand {
+    position: sticky;
+    top: var(--inset-top);
+    align-self: start;
+    min-height: calc(100dvh - var(--inset-top) - var(--inset-bottom));
+  }
 }
 
-@media(max-width:700px) {
- .login-wrap { height:100%; min-height:0; background-position:center top; background-size:cover; background-repeat:no-repeat; background-color:#171830; overflow:hidden; justify-content:flex-end; }
- .login-brand { position:absolute; inset:0; min-height:0; height:100%; padding:0; pointer-events:none; align-items:center; }
- .brand-lockup { display:none; }
- .mobile-wordmark { display:block; position:absolute; top:max(74px, calc(env(safe-area-inset-top) + 48px)); left:50%; transform:translateX(-50%); width:140px; height:80px; object-fit:contain; }
- .brand-message { position:absolute; display:block; left:12px; right:12px; bottom:calc(66% + 34px); padding:0; margin:0; text-align:center; }
- .brand-eyebrow { display:none; }
- .brand-message p { display:block; color:#fff; font-size:9px; line-height:1.4; margin:0; }
- h1 { display:none; }
- .login-form { position:relative; isolation:isolate; flex:0 0 66%; width:calc(100% - 5px); margin:0 5px 0 0; min-height:0; padding:58px 30px 12px; border-radius:76px 76px 0 0; background:#fff; }
- .login-form::before { display:none; }
- .form-inner,footer { position:relative; }
- h2 { text-align:center; font-size:clamp(22px,6vw,28px); letter-spacing:-.8px; }
- .form-intro { font-size:10px; text-align:center; margin:4px 0 42px; }
- .form-col { gap:6px; margin-bottom:14px; }
+@media (max-width: 700px) {
+  .login-wrap { display: flex; flex-direction: column; padding: 0; background: #171830; }
+  .login-brand {
+    align-items: center;
+    justify-content: center;
+    min-height: calc(33svh + 32px);
+    gap: 4px;
+    padding: max(36px, env(safe-area-inset-top)) 16px 64px;
+    text-align: center;
+    background: linear-gradient(rgba(18, 19, 61, .65), rgba(18, 19, 61, .65)), url('/assets/campus.jpg') 70% center / cover;
+  }
+  .brand-lockup, .brand-eyebrow, h1 { display: none; }
+  .mobile-wordmark { display: block; width: 170px; height: 95px; object-fit: contain; }
+  .brand-message { padding: 0; margin: 0; }
+  .brand-message p { display: none; }
+  .brand-message .mobile-tagline { display: block; color: #fff; font-size: 9px; line-height: 1.4; }
+  .login-form {
+    flex: 1 0 auto;
+    min-height: 67svh;
+    margin-top: -32px;
+    position: relative;
+    padding: clamp(40px, 7svh, 60px) max(32px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(32px, env(safe-area-inset-left));
+    border-radius: 64px 64px 0 0;
+  }
+ h2 { text-align:center; font-size:clamp(22px,6vw,26px); letter-spacing:-.8px; }
+ .form-intro { font-size:10px; text-align:center; margin:12px 0 40px; }
+ .form-col { gap:6px; margin-bottom:16px; }
  .field-label { font-size:10px; }
- .field { min-height:38px; padding:9px; font-size:14px; }
+ .field { min-height:40px; padding:10px; font-size:16px; border-radius:3px; }
  .field::placeholder { font-size:12px; }
- .login-options { font-size:10px; margin-top:-5px; margin-bottom:12px; gap:8px; }
+ .login-options { font-size:10px; margin-top:-5px; margin-bottom:30px; gap:8px; }
  .login-options label { gap:8px; }
  .login-options input { width:12px; height:12px; }
- .login-btn { min-height:38px; margin:0; font-size:13px; }
- .demo-access { display:none; }
- footer { padding-top:12px; font-size:9px; }
+ .login-btn { min-height:40px; margin:0; font-size:12px; }
+ .demo-access { margin-top:10px; font-size:10px; }
+
+ footer { padding-top:28px; font-size:9px; }
 }
