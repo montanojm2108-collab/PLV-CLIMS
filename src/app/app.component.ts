@@ -4,7 +4,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { searchOutline, calendarOutline, optionsOutline, homeOutline, gridOutline, businessOutline, desktopOutline, ticketOutline, addCircleOutline, clipboardOutline, timeOutline, constructOutline, megaphoneOutline, peopleOutline, settingsOutline, personOutline, logOutOutline } from 'ionicons/icons';
+import { searchOutline, calendar, calendarOutline, optionsOutline, homeOutline, gridOutline, businessOutline, desktopOutline, ticketOutline, addCircleOutline, clipboardOutline, timeOutline, constructOutline, megaphoneOutline, peopleOutline, settingsOutline, personOutline, logOutOutline } from 'ionicons/icons';
 import { AuthService } from './core/auth.service';
 import { CreateTicketPage } from './pages/create-ticket/create-ticket.page';
 import { PageHeaderComponent } from './shared/page-header.component';
@@ -15,7 +15,7 @@ interface NavLink {
 }
 @Component({ selector: 'app-root', standalone: true, imports: [CommonModule, IonicModule, RouterLink, RouterLinkActive, PageHeaderComponent], templateUrl: './app.component.html', styleUrls: ['./app.component.scss'] })
 export class AppComponent {
-    constructor() { addIcons({ searchOutline, calendarOutline, optionsOutline, homeOutline, gridOutline, businessOutline, desktopOutline, ticketOutline, addCircleOutline, clipboardOutline, timeOutline, constructOutline, megaphoneOutline, peopleOutline, settingsOutline, personOutline, logOutOutline }); }
+    constructor() { addIcons({ searchOutline, calendar, calendarOutline, optionsOutline, homeOutline, gridOutline, businessOutline, desktopOutline, ticketOutline, addCircleOutline, clipboardOutline, timeOutline, constructOutline, megaphoneOutline, peopleOutline, settingsOutline, personOutline, logOutOutline }); }
     auth = inject(AuthService);
     router = inject(Router);
     modal = inject(ModalController);

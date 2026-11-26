@@ -13,10 +13,8 @@ export class StudentDashboardPage {
     query = '';
     status = labAvailability;
     get labs() { const q = this.query.trim().toLowerCase(); return this.data.state().labs.filter(l => (l.name + ' ' + l.building + ' ' + l.room + ' ' + l.description + ' ' + this.status(l)).toLowerCase().includes(q)); }
-    workingCount(id: string) { return this.data.state().computers.filter(c => c.labId === id && c.status === 'Working').length; }
-    get availableLabs() { return this.data.state().labs.filter(l => this.status(l) === 'Available').length; }
-    get working() { return this.data.state().computers.filter(c => c.status === 'Working').length; }
-    get unavailable() { return this.data.state().computers.filter(c => c.status !== 'Working').length; }
-    get announcements() { return this.data.state().announcements.filter(a => !a.archived).slice(0, 3); }
+    get featuredLabs() { return this.labs.slice(0, 3); }
+    computerCount(id: string) { return this.data.state().computers.filter(c => c.labId === id).length; }
+    get announcements() { return this.data.state().announcements.filter(a => !a.archived); }
     go(path: string) { void this.router.navigateByUrl(path); }
 }

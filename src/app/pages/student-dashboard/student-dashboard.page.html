@@ -1,16 +1,51 @@
 <app-page-header title="Dashboard"></app-page-header>
-<ion-content><main class="page-wrap student-page student-dashboard">
-  <div class="search-field dashboard-search"><ion-icon name="search-outline" aria-hidden="true"></ion-icon><input [(ngModel)]="query" placeholder="Search room, functionality" aria-label="Search laboratories"></div>
-  <div class="lab-stats" aria-label="Laboratory summary">
-    <div class="lab-stat available-stat"><span class="stat-icon"><ion-icon name="business-outline" aria-hidden="true"></ion-icon></span><span><strong>{{availableLabs}}</strong><small>Available Labs</small></span></div>
-    <div class="lab-stat working-stat"><span class="stat-icon"><ion-icon name="desktop-outline" aria-hidden="true"></ion-icon></span><span><strong>{{working}}</strong><small>Working PCs</small></span></div>
-    <div class="lab-stat unavailable-stat"><span class="stat-icon"><ion-icon name="construct-outline" aria-hidden="true"></ion-icon></span><span><strong>{{unavailable}}</strong><small>Non-working PCs</small></span></div>
-  </div>
-  <div class="dashboard-columns">
-    <section class="dashboard-panel"><div class="panel-heading"><h2>Laboratory Overview</h2><button class="text-action" (click)="go('/student/laboratories')">View all &rsaquo;</button></div>
-      <button class="overview-lab" type="button" *ngFor="let lab of labs" (click)="go('/student/laboratories/'+lab.id)"><span class="computer-icon"><ion-icon name="desktop-outline" aria-hidden="true"></ion-icon></span><span class="overview-lab-details"><strong>{{lab.name}}</strong><small>{{lab.building}} &middot; {{lab.room}}</small></span><span class="lab-summary"><span class="working-pcs">{{workingCount(lab.id)}} working PCs <span aria-hidden="true">&rsaquo;</span></span><small class="lab-availability" [class.unavailable]="status(lab)==='Unavailable'" [class.in-use]="status(lab)==='In Use'">{{status(lab)}}</small></span></button>
-      <p class="empty" *ngIf="!labs.length">No laboratories match your search.</p>
+<ion-content>
+  <main class="page-wrap student-page student-dashboard">
+    <div class="search-field dashboard-search">
+      <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+      <input [(ngModel)]="query" placeholder="Search room, functionality" aria-label="Search laboratories">
+    </div>
+
+    <section class="dashboard-panel laboratory-panel" aria-labelledby="laboratory-title">
+      <div class="panel-heading">
+        <div>
+          <h1 id="laboratory-title">Laboratory Availability</h1>
+          <p>Real-time status of all computer laboratories.</p>
+        </div>
+        <button class="text-action" type="button" (click)="go('/student/laboratories')">View All Laboratories <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></button>
+      </div>
+
+      <div class="laboratory-list" role="table" aria-label="Laboratory availability">
+        <div class="laboratory-head" role="row">
+          <span role="columnheader">Laboratory</span>
+          <span role="columnheader">Location</span>
+          <span role="columnheader">Total PCs</span>
+          <span role="columnheader">Status</span>
+        </div>
+        <button class="laboratory-row" type="button" role="row" *ngFor="let lab of featuredLabs" (click)="go('/student/laboratories/' + lab.id)" [attr.aria-label]="lab.name + ', ' + lab.building + ', ' + lab.room + ', ' + computerCount(lab.id) + ' PCs, ' + status(lab)">
+          <span class="laboratory-name" role="cell"><span class="computer-icon"><ion-icon name="desktop-outline" aria-hidden="true"></ion-icon></span><strong>{{lab.name}}</strong></span>
+          <span class="laboratory-location" role="cell">{{lab.building}} <span aria-hidden="true">&middot;</span> {{lab.room}}</span>
+          <span class="laboratory-count" role="cell">{{computerCount(lab.id)}}</span>
+          <span class="laboratory-status" role="cell"><span class="availability-badge" [class.in-use]="status(lab)==='In Use'" [class.unavailable]="status(lab)==='Unavailable'"><span class="status-dot" aria-hidden="true"></span>{{status(lab)}}</span></span>
+        </button>
+      </div>
+      <p class="empty" *ngIf="!featuredLabs.length">No laboratories match your search.</p>
     </section>
-    <section class="dashboard-panel"><h2>Announcements</h2><div class="dashboard-notice" *ngFor="let a of announcements"><span class="notice-date">{{a.date | date:'MMM d'}}</span><strong>{{a.title}}</strong><span>{{a.body}}</span></div><p class="empty" *ngIf="!announcements.length">No announcements yet.</p><button class="text-action" (click)="go('/announcements')">View all &rsaquo;</button></section>
-  </div>
-</main></ion-content>
+
+    <section class="dashboard-panel announcements-panel" aria-labelledby="announcements-title">
+      <h2 id="announcements-title">Announcement</h2>
+      <p>Important updates and reminders from the IT Office.</p>
+      <div class="announcements-list">
+        <article class="announcement-row" *ngFor="let announcement of announcements">
+          <span class="notification-icon"><ion-icon name="calendar" aria-hidden="true"></ion-icon></span>
+          <div class="announcement-copy">
+            <h3>{{announcement.title}}</h3>
+            <p>{{announcement.body}}</p>
+            <time [attr.datetime]="announcement.date">{{announcement.date | date:'MMM d, y'}}</time>
+          </div>
+        </article>
+        <p class="empty" *ngIf="!announcements.length">No announcements yet.</p>
+      </div>
+    </section>
+  </main>
+</ion-content>
